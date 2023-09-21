@@ -21,7 +21,7 @@ int controlDelay = 100;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "SYMB";
+String label = "abcdefghijklmn";
 
 //Plotter dimensions
 int xMin = 170;
@@ -45,9 +45,7 @@ void setup(){
   //size(1080, 750);
   smooth();
   
-  
   // interface 
-  
   controlP5 = new ControlP5(this);
   controlP5.addToggle("toggleAmp").setPosition(20,20).setSize(20,20)
     .setCaptionLabel("Amplitude")
@@ -71,13 +69,14 @@ void setup(){
   println(Serial.list()); //Print all serial ports to the console
   int portNumber = Serial.list().length;
   println("Number of ports: " + portNumber + ", port selected: " + serialPort);
-  if (serialPort>=portNumber){
+  /*if (serialPort>=portNumber){
     serialPort = portNumber-1;
     println("Selected port not available, changing to last port...");
   }
   String portName = Serial.list()[serialPort]; //make sure you pick the right one
   println("Plotting to port: " + portName);
-  
+  */
+  String portName = "/dev/ttys002"; // for Moxa Device
   //Open the port
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil(lf);
@@ -96,23 +95,27 @@ void setup(){
 }
 
 void draw(){
- plotLabel();
+
 }
 
 
 
-void plotLabel(){
+void plotLabel(String text){
   //Draw a label at the end
   //label = "XY // ";
   float ty = map(80, 0, height, yMin, yMax);
-  println(label);
+  println(text);
   plotter.write("PU"+10800+","+ty+";"); //Position pen
-  plotter.write("SI0.14,0.14;DI0,1;LB" + label + char(3)); //Draw label
+  plotter.write("SI1,1;DI0,1;LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
+}
+
+void plotTextSize(float sizeL, float sizeH){
+plotter.write("SI" + sizeL + "," + sizeH + ";");
 }
 
 void keyReleased() {
  if (key == 'E' || key == 'e') {
-      plotLabel();
+      plotLabel(label);
       delay(5000);
       exit();
     } else if (key == 'A' || key == 'a') {
