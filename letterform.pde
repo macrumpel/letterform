@@ -21,8 +21,10 @@ float controlSize = 1.5;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "ABCDEFGHIJKLM";
-String label2= "NOPQRSTUVWYZ";
+String label = "OU    JETER";
+String label2= "   DE";
+String label3= "abcdefghijklm";
+String label4= "nopqrstuvwxyz";
 
 //Plotter dimensions
 int xMin = 170;
@@ -109,7 +111,13 @@ void plotLabel(String text){
 void plotPenselect(int penNumber){
   //Send pen selection to plotter
   println("Pen slection :" + penNumber);
-  plotter.write("SP" + penNumber + char(3));
+  plotter.write("SP" + penNumber + ";");
+}
+
+void plotLetterPosition(int letterposX, int letterposY){
+  // move cursor to x and y places of letters
+  println("Move by " + letterposX + " places horiz., " + letterposY + "vertically");
+  plotter.write("CP" + letterposX + "," + letterposY + ";");
 }
 
 void plotPosition(float xPos, float yPos){
@@ -118,6 +126,12 @@ void plotPosition(float xPos, float yPos){
   println(height);
   plotter.write("PU"+xPos+","+ty+";"); // position pen
 }
+
+void plotSpeed(int speed){
+  println("Plotter speed: " + speed + ";");
+  plotter.write("VS" + speed + ";");
+}
+
 void plotTextSize(float sizeL, float sizeH){
  plotter.write("SI" + sizeL + "," + sizeH + ";");
 }
@@ -128,13 +142,19 @@ void plotDirection(int directCourse, int directElevation){
 
 void keyReleased() {
  if (key == 'P' || key == 'p') {
-      plotTextSize(controlSize,controlSize);
+      plotTextSize(controlSize,controlSize*2);
       plotDirection(1,0);
-      plotPosition(500,800);
-      plotPenselect(2);
-      plotLabel(label);
       plotPosition(500,400);
+      plotSpeed(pSpeed);
+      plotPenselect(4);
+      plotLabel(label);
+      plotLetterPosition(-label.length(), 0);
+      //plotPosition(500,600);
       plotLabel(label2);
+      /*plotPosition(500,400);
+      plotLabel(label3);
+      plotPosition(500,200);
+      plotLabel(label4); */
       delay(5000);
       exit();
     } else if (key == 'A' || key == 'a') {
