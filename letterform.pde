@@ -15,13 +15,14 @@ boolean toggleFreq = true;
 boolean togglePlotter = true;
 boolean toggleSpeed = false;
 boolean toggleAuto = false;
-float controlSize = 1;
+float controlSize = 1.5;
 
 //Enable plotting?
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "ABCDEFG";
+String label = "ABCDEFGHIJKLM";
+String label2= "NOPQRSTUVWYZ";
 
 //Plotter dimensions
 int xMin = 170;
@@ -123,8 +124,11 @@ void plotDirection(int directCourse, int directElevation){
 void keyReleased() {
  if (key == 'P' || key == 'p') {
       plotTextSize(controlSize,controlSize);
-      plotPosition(10800,80);
+      plotDirection(1,0);
+      plotPosition(500,800);
       plotLabel(label);
+      plotPosition(500,400);
+      plotLabel(label2);
       delay(5000);
       exit();
     } else if (key == 'A' || key == 'a') {
