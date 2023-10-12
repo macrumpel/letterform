@@ -102,13 +102,16 @@ void draw(){
 
 void plotLabel(String text){
   //Draw a label at the end
-  //label = "XY // ";
-  float ty = map(80, 0, height, yMin, yMax);
   println(text);
-  plotter.write("PU"+10800+","+ty+";"); //Position pen
   plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
 
+void plotPosition(float xPos, float yPos){
+  float ty = map(yPos, 0, height, yMin, yMax); // map coordinate Y
+  println(ty);
+  println(height);
+  plotter.write("PU"+xPos+","+ty+";"); // position pen
+}
 void plotTextSize(float sizeL, float sizeH){
  plotter.write("SI" + sizeL + "," + sizeH + ";");
 }
@@ -120,6 +123,7 @@ void plotDirection(int directCourse, int directElevation){
 void keyReleased() {
  if (key == 'E' || key == 'e') {
       plotTextSize(1,1);
+      plotPosition(10800,80);
       plotLabel(label);
       delay(5000);
       exit();
