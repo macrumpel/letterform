@@ -106,7 +106,7 @@ void plotLabel(String text){
   float ty = map(80, 0, height, yMin, yMax);
   println(text);
   plotter.write("PU"+10800+","+ty+";"); //Position pen
-  plotter.write("DI0,1;LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
+  plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
 
 void plotTextSize(float sizeL, float sizeH){
