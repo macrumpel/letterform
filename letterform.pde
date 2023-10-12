@@ -106,6 +106,11 @@ void plotLabel(String text){
   println(text);
   plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
+void plotPenselect(int penNumber){
+  //Send pen selection to plotter
+  println("Pen slection :" + penNumber);
+  plotter.write("SP" + penNumber + char(3));
+}
 
 void plotPosition(float xPos, float yPos){
   float ty = map(yPos, 0, height, yMin, yMax); // map coordinate Y
@@ -126,6 +131,7 @@ void keyReleased() {
       plotTextSize(controlSize,controlSize);
       plotDirection(1,0);
       plotPosition(500,800);
+      plotPenselect(2);
       plotLabel(label);
       plotPosition(500,400);
       plotLabel(label2);
