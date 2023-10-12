@@ -123,7 +123,7 @@ class Symbol{
     
     plotter.write(pen+_x1+","+_y1+";");
     //println(pen+_x1+","+_y1+";");
-    plotter.write("PD"+_x2+","+_y2+";", controlDelay); //75 ms delay
+    plotter.write("PD"+_x2+","+_y2+";", 75); //75 ms delay
   }
     float rotX(float inX, float inY){
     inX = inX-0.5; // translate from center point for rectancgle

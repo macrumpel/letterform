@@ -15,7 +15,7 @@ boolean toggleFreq = true;
 boolean togglePlotter = true;
 boolean toggleSpeed = false;
 boolean toggleAuto = false;
-int controlDelay = 100;
+float controlSize = 1;
 
 //Enable plotting?
 final boolean PLOTTING_ENABLED = true;
@@ -56,9 +56,9 @@ void setup(){
   controlP5.addToggle("toggleAuto").setPosition(120,20).setSize(20,20)
     .setCaptionLabel("Auto")
     .setColorCaptionLabel(0);
-  controlP5.addSlider("controlDelay").setPosition(170,20).setSize(80,20)
-    .setRange(50,300)
-    .setCaptionLabel("delay")
+  controlP5.addSlider("controlSize").setPosition(170,20).setSize(80,20)
+    .setRange(0.1,5)
+    .setCaptionLabel("text size")
     .setColorCaptionLabel(0);
   controlP5.addSlider("pSpeed").setPosition(300,20).setSize(80,20)
     .setColorCaptionLabel(0)
@@ -121,8 +121,8 @@ void plotDirection(int directCourse, int directElevation){
 }
 
 void keyReleased() {
- if (key == 'E' || key == 'e') {
-      plotTextSize(1,1);
+ if (key == 'P' || key == 'p') {
+      plotTextSize(controlSize,controlSize);
       plotPosition(10800,80);
       plotLabel(label);
       delay(5000);
