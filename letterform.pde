@@ -21,7 +21,7 @@ int controlDelay = 100;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "abcdefghijklmn";
+String label = "ABCDEFG";
 
 //Plotter dimensions
 int xMin = 170;
@@ -106,15 +106,20 @@ void plotLabel(String text){
   float ty = map(80, 0, height, yMin, yMax);
   println(text);
   plotter.write("PU"+10800+","+ty+";"); //Position pen
-  plotter.write("SI1,1;DI0,1;LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
+  plotter.write("DI0,1;LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
 
 void plotTextSize(float sizeL, float sizeH){
-plotter.write("SI" + sizeL + "," + sizeH + ";");
+ plotter.write("SI" + sizeL + "," + sizeH + ";");
+}
+
+void plotDirection(int directCourse, int directElevation){
+  plotter.write("DI" + directCourse + "," + directElevation + ";");
 }
 
 void keyReleased() {
  if (key == 'E' || key == 'e') {
+      plotTextSize(1,1);
       plotLabel(label);
       delay(5000);
       exit();
