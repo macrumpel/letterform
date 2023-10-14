@@ -21,7 +21,7 @@ float controlSize = 1.5;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "OU    JETER";
+String label = "RIEN\r\nNOW";
 String label2= "   DE";
 String label3= "abcdefghijklm";
 String label4= "nopqrstuvwxyz";
@@ -93,9 +93,9 @@ void setup(){
   delay(5000);
   //Initialize plotter
   plotter.write("IN;");
-  plotPosition(500,400);
+  plotPosition(4000,100);
   plotTextSize(controlSize,controlSize*2);
-  plotDirection(1,0);
+  plotDirection(0,1);
   plotSpeed(pSpeed);
   plotPenselect(4);
   
@@ -114,15 +114,19 @@ void draw(){
     println("Now plotting: " + cnew);
     plotLabel(str(cnew));
   }
-  if (ambigFlag = true) {
-    plotPenselect(3);
-    plotLetterPosition(-label.length(), 0);
+  plotPosition(0,0); // show the paper
+  delay(1000);
+  if (ambigFlag = true) { // if there was an abigous letter then...
+    plotPenselect(3); // draw now in red
+    plotPosition(4000,100); // go to initial position (multiline)
+    //plotLetterPosition(-label.length(), 0); // go back to the latest place
     for (int i=0; i < label.length(); i = i+1){
       char c = label.charAt(i);
       char cnew = evaluateAmbigLetter(c); // send to evaluation
       println("Now plotting: " + cnew);
      }
   }
+  plotPenselect(0);
   exit();
 }
 

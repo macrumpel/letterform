@@ -13,7 +13,6 @@ return letter;
 
 char evaluateAmbigLetter(char letter){ 
  if (letter == 'E'){
-      letter = 'E';
       boolean ambigFlag = false;
       plotletterAmbig(letter);
   } else {
