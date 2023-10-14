@@ -25,6 +25,7 @@ String label = "OU    JETER";
 String label2= "   DE";
 String label3= "abcdefghijklm";
 String label4= "nopqrstuvwxyz";
+boolean ambigFlag = false;
 
 //Plotter dimensions
 int xMin = 170;
@@ -113,6 +114,15 @@ void draw(){
     println("Now plotting: " + cnew);
     plotLabel(str(cnew));
   }
+  if (ambigFlag = true) {
+    plotPenselect(3);
+    plotLetterPosition(-label.length(), 0);
+    for (int i=0; i < label.length(); i = i+1){
+      char c = label.charAt(i);
+      char cnew = evaluateAmbigLetter(c); // send to evaluation
+      println("Now plotting: " + cnew);
+     }
+  }
   exit();
 }
 
@@ -182,5 +192,4 @@ void keyReleased() {
       toggleAuto = !toggleAuto;
       controlP5.getController("toggleAuto").setValue(int(toggleAuto)); 
     } 
-
  }
