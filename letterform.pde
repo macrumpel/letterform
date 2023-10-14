@@ -32,6 +32,9 @@ int yMin = 602;
 int xMax = 10800;
 int yMax = 7500;
 
+//Plotter initial pen number
+int penNumber = 4;
+
 //Plotter speed
 int pSpeed = 5;
 int vsOld; // last speed
@@ -86,9 +89,14 @@ void setup(){
   
   //Associate with a plotter object
   plotter = new Plotter(myPort);
-  
+  delay(5000);
   //Initialize plotter
-  plotter.write("IN;SP1;");
+  plotter.write("IN;");
+  plotPosition(500,400);
+  plotTextSize(controlSize,controlSize*2);
+  plotDirection(1,0);
+  plotSpeed(pSpeed);
+  plotPenselect(4);
   
 //Wait 0.5 second per character while printing label
 /*  if (PLOTTING_ENABLED) {
@@ -98,25 +106,32 @@ void setup(){
 }
 
 void draw(){
-
+  println(); // take the label and individually sent the letters to the plotter
+  for (int i=0; i < label.length(); i = i+1){
+    char c = label.charAt(i);
+    char cnew = evaluateLetter(c); // send to evaluation
+    println("Now plotting: " + cnew);
+    plotLabel(str(cnew));
+  }
+  exit();
 }
 
 
 
 void plotLabel(String text){
   //Draw a label at the end
-  println(text);
+  //println(text);
   plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
 void plotPenselect(int penNumber){
   //Send pen selection to plotter
-  println("Pen slection :" + penNumber);
+  println("Pen slection: " + penNumber);
   plotter.write("SP" + penNumber + ";");
 }
 
 void plotLetterPosition(int letterposX, int letterposY){
   // move cursor to x and y places of letters
-  println("Move by " + letterposX + " places horiz., " + letterposY + "vertically");
+  println("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
   plotter.write("CP" + letterposX + "," + letterposY + ";");
 }
 
@@ -128,7 +143,7 @@ void plotPosition(float xPos, float yPos){
 }
 
 void plotSpeed(int speed){
-  println("Plotter speed: " + speed + ";");
+  println("Plotter speed: " + speed + " cm/s");
   plotter.write("VS" + speed + ";");
 }
 
