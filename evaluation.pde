@@ -3,20 +3,29 @@ Replace ambigous letters
 ***********************/
 
 char evaluateLetter(char letter){ 
- if (letter == 'E'){
-      letter = 'F';
-      boolean ambigFlag = true;
+ switch (letter) {
+      case 'E' :
+        letter = 'F';
+        ambigFlag = true;
+        break;
+      case 'O' :
+        letter = 'C';
+        ambigFlag = true;
+        break;
   }
 
 return letter;
 }
 
 char evaluateAmbigLetter(char letter){ 
- if (letter == 'E'){
-      boolean ambigFlag = false;
+  String ambigousLetters = "EO";
+ if (ambigousLetters.contains(str(letter))){
+      ambigFlag = false;
       plotletterAmbig(letter);
+  } else if ((letter == '\n') || (letter == '\r')) {
+      plotLabel(str(letter));
   } else {
-    plotLabel(" ");
+      plotLabel(" ");
   }
 
 return letter;

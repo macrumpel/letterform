@@ -21,7 +21,7 @@ float controlSize = 1.5;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "RIEN\r\nNOW";
+String label = "COMPOSER\r\nAVEC\r\nLES\r\nMOUTONS";
 String label2= "   DE";
 String label3= "abcdefghijklm";
 String label4= "nopqrstuvwxyz";
@@ -37,7 +37,7 @@ int yMax = 7500;
 int penNumber = 4;
 
 //Plotter speed
-int pSpeed = 5;
+int pSpeed = 15;
 int vsOld; // last speed
 
 //Current rows and cols
@@ -115,7 +115,7 @@ void draw(){
     plotLabel(str(cnew));
   }
   plotPosition(0,0); // show the paper
-  delay(1000);
+  delay(3000);
   if (ambigFlag = true) { // if there was an abigous letter then...
     plotPenselect(3); // draw now in red
     plotPosition(4000,100); // go to initial position (multiline)
@@ -126,6 +126,7 @@ void draw(){
       println("Now plotting: " + cnew);
      }
   }
+  plotPosition(0,0);
   plotPenselect(0);
   exit();
 }
