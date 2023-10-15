@@ -26,6 +26,7 @@ String label2= "   DE";
 String label3= "abcdefghijklm";
 String label4= "nopqrstuvwxyz";
 boolean ambigFlag = false;
+String ambigousLetters = "EO";
 
 //Plotter dimensions
 int xMin = 170;
@@ -98,6 +99,7 @@ void setup(){
   plotDirection(0,1);
   plotSpeed(pSpeed);
   plotPenselect(4);
+  plotSpacing(0,-0.5);
   
 //Wait 0.5 second per character while printing label
 /*  if (PLOTTING_ENABLED) {
@@ -131,17 +133,24 @@ void draw(){
   exit();
 }
 
-
+// functions :
 
 void plotLabel(String text){
   //Draw a label at the end
   //println(text);
   plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
 }
+
 void plotPenselect(int penNumber){
   //Send pen selection to plotter
   println("Pen slection: " + penNumber);
   plotter.write("SP" + penNumber + ";");
+}
+
+void plotSpacing(float spacing, float lining){
+  //Send spacing and linefeed to plotter
+  println("Spacing / Linefeed: " + spacing + "/ " + lining);
+  plotter.write("ES" + spacing + "," + lining + ";");
 }
 
 void plotLetterPosition(int letterposX, int letterposY){
