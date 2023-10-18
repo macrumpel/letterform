@@ -23,7 +23,7 @@ final boolean PLOTTING_ENABLED = true;
 //Label
 String label = "COMPOSER\r\nAVEC\r\nLES\r\nMOUTONS";
 String label2= "   DE";
-String label3= "abcdefghijklm";
+String label3= "abcdefghijklm"; 
 String label4= "nopqrstuvwxyz";
 boolean ambigFlag = false;
 String ambigousLetters = "EO";
@@ -99,7 +99,7 @@ void setup(){
   plotDirection(0,1);
   plotSpeed(pSpeed);
   plotPenselect(4);
-  plotSpacing(0,-0.5);
+  // plotSpacing(0,-0.5); not supported
   
 //Wait 0.5 second per character while printing label
 /*  if (PLOTTING_ENABLED) {
@@ -109,12 +109,20 @@ void setup(){
 }
 
 void draw(){
-  println(); // take the label and individually sent the letters to the plotter
+  // plotSpacing(0,-1); not supported
+  println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
   for (int i=0; i < label.length(); i = i+1){
     char c = label.charAt(i);
     char cnew = evaluateLetter(c); // send to evaluation
-    println("Now plotting: " + cnew);
-    plotLabel(str(cnew));
+    if (letter == '\n'){
+      println("Now making a linefeed");
+      plotLetterPosition(0,-0.5); // reduce linefeed distance
+    } else if (letter == '\r') {
+      println("Now making a carriage return");
+    } else {
+      println("Now plotting: " + cnew);
+      plotLabel(str(cnew));
+    }
   }
   plotPosition(0,0); // show the paper
   delay(3000);
@@ -147,13 +155,13 @@ void plotPenselect(int penNumber){
   plotter.write("SP" + penNumber + ";");
 }
 
-void plotSpacing(float spacing, float lining){
+/* void plotSpacing(float spacing, float lining){
   //Send spacing and linefeed to plotter
   println("Spacing / Linefeed: " + spacing + "/ " + lining);
   plotter.write("ES" + spacing + "," + lining + ";");
-}
+} */ // not supported in HPGL-1
 
-void plotLetterPosition(int letterposX, int letterposY){
+void plotLetterPosition(float letterposX, float letterposY){
   // move cursor to x and y places of letters
   println("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
   plotter.write("CP" + letterposX + "," + letterposY + ";");
