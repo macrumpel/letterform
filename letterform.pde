@@ -21,12 +21,12 @@ float controlSize = 1.5;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "COMPOSER\r\nAVEC\r\nLES\r\nMOUTONS";
+String label = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM.";
 String label2= "   DE";
 String label3= "abcdefghijklm"; 
 String label4= "nopqrstuvwxyz";
 boolean ambigFlag = false;
-String ambigousLetters = "EO";
+String ambigousLetters = "EORB";
 
 //Plotter dimensions
 int xMin = 170;
@@ -91,7 +91,7 @@ void setup(){
   
   //Associate with a plotter object
   plotter = new Plotter(myPort);
-  delay(5000);
+  delay(2000);
   //Initialize plotter
   plotter.write("IN;");
   plotPosition(4000,100);
@@ -114,11 +114,13 @@ void draw(){
   for (int i=0; i < label.length(); i = i+1){
     char c = label.charAt(i);
     char cnew = evaluateLetter(c); // send to evaluation
-    if (letter == '\n'){
+    if (cnew == '\n'){
       println("Now making a linefeed");
-      plotLetterPosition(0,-0.5); // reduce linefeed distance
-    } else if (letter == '\r') {
+      plotLetterPosition(0,0.5); // reduce linefeed distance
+      plotLabel(str(cnew));
+    } else if (cnew == '\r') {
       println("Now making a carriage return");
+      plotLabel(str(cnew));
     } else {
       println("Now plotting: " + cnew);
       plotLabel(str(cnew));

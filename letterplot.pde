@@ -8,6 +8,10 @@ void plotletterAmbig (char letterAmbig){
         plotter.write("UC4,6,99,0,-4");
         println("Now plotting to complete letter " + letterAmbig);
         break;
+    case 'R':
+        plotter.write("UC3,3.5,99,0.5,-0.2,0.5,-0.3,0,-3");
+        println("Now plotting to complete letter " + letterAmbig);
+        break;
     
     }
 }
