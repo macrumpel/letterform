@@ -21,6 +21,20 @@ char evaluateLetter(char letter){
           letter = 'E';
           ambigFlag = true;
           break;
+        case '?' :
+          letter = '.';
+          ambigFlag = true;
+          break;
+        case 'T' :
+          letter = '\t';
+          SpecialCharacter = "UC2,0,99,0,8";
+          //plotPosition(-1,0);
+          ambigFlag = true;
+          break;
+        case 'U' :
+          letter = 'J';
+          ambigFlag = true;
+          break;
   }
   }
 return letter;
@@ -32,7 +46,7 @@ char evaluateAmbigLetter(char letter){
       plotletterAmbig(letter);
   } else if (letter == '\n') {
       plotLabel(str(letter));
-      plotLetterPosition(0,0.5); // reduce linefeed distance
+      plotLetterPosition(0,0.1); // reduce linefeed distance
   }  else if (letter == '\r') {
       plotLabel(str(letter));
   }  else {

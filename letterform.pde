@@ -21,12 +21,14 @@ float controlSize = 1.5;
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM.";
+String label= "THIS ATE";
+String label5 = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM?";
 String label2= "   DE";
 String label3= "abcdefghijklm"; 
 String label4= "nopqrstuvwxyz";
 boolean ambigFlag = false;
-String ambigousLetters = "EORB";
+String ambigousLetters = "EORB?TU";
+String SpecialCharacter = "";
 
 //Plotter dimensions
 int xMin = 170;
@@ -38,7 +40,7 @@ int yMax = 7500;
 int penNumber = 4;
 
 //Plotter speed
-int pSpeed = 15;
+int pSpeed = 10;
 int vsOld; // last speed
 
 //Current rows and cols
@@ -116,19 +118,24 @@ void draw(){
     char cnew = evaluateLetter(c); // send to evaluation
     if (cnew == '\n'){
       println("Now making a linefeed");
-      plotLetterPosition(0,0.5); // reduce linefeed distance
+      plotLetterPosition(0,0.1); // reduce linefeed distance
       plotLabel(str(cnew));
     } else if (cnew == '\r') {
       println("Now making a carriage return");
       plotLabel(str(cnew));
+    }  
+      else if (cnew == '\t') {
+      println("Now plotting a special character");
+      plotter.write(SpecialCharacter);
     } else {
       println("Now plotting: " + cnew);
       plotLabel(str(cnew));
     }
   }
   plotPosition(0,0); // show the paper
-  delay(3000);
+  delay(5000);
   if (ambigFlag = true) { // if there was an abigous letter then...
+    println("Overwriting ambigous letters now...");
     plotPenselect(3); // draw now in red
     plotPosition(4000,100); // go to initial position (multiline)
     //plotLetterPosition(-label.length(), 0); // go back to the latest place
