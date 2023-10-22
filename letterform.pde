@@ -32,7 +32,9 @@ boolean ambigFlag = false;
 String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
 JSONArray poesieJSON;
-int poesieNumber = 1;
+JSONArray poesieTextJSON;
+int poesieNumber = 2; // select poesie in json
+int poesieLines = 1;
 
 
 //Plotter dimensions
@@ -68,10 +70,13 @@ void setup(){
   ambigousLetters = poesieObject.getString("ambigous");
   println ("Ambigous letters used: " + ambigousLetters);
   controlSize = poesieObject.getFloat("font size");
-  println ("This is for font size of " + controlSize + "cm.");
-  int poesieLines = poesieObject.getJSONArray("text lines").size();
+  println ("Setting font size of " + controlSize + "cm.");
+  poesieTextJSON = poesieObject.getJSONArray("text lines");
+  poesieLines = poesieObject.getJSONArray("text lines").size();
   println(poesieLines + " line(s) in this poesie.");
-  println ("[JSON] Poesie loaded.");
+  println("[JSON] Poesie loaded.");
+  println();
+
   // interface 
   controlP5 = new ControlP5(this);
   controlP5.addToggle("toggleAmp").setPosition(20,20).setSize(20,20)
@@ -117,7 +122,6 @@ void setup(){
   plotTextSize(controlSize,controlSize*2);
   plotDirection(0,1);
   plotSpeed(pSpeed);
-  plotPenselect(4);
   // plotSpacing(0,-0.5); not supported
   
 //Wait 0.5 second per character while printing label
@@ -128,31 +132,36 @@ void setup(){
 }
 
 void draw(){
-  // plotSpacing(0,-1); not supported
-  println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
-  println("Plotting text: " + label);
-  println("Number of characters :" + label.length());
-  for (int i=0; i < label.length(); i = i+1){
-    char c = label.charAt(i);
-    char cnew = evaluateLetter(c); // send to evaluation
-    if (cnew == '\n'){
-      println("Now making a linefeed");
-      plotLetterPosition(0,0.2); // reduce linefeed distance
-      plotLabel(str(cnew));
-    } else if (cnew == '\r') {
-      println("Now making a carriage return");
-      plotLabel(str(cnew));
-    }  
-      else if (cnew == '\t') {
-      println("Now plotting a special character");
-      plotter.write(SpecialCharacter);
-    } else {
-      println("Now plotting: " + cnew);
-      plotLabel(str(cnew));
+  for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
+    JSONObject textLine = poesieTextJSON.getJSONObject(l);
+    penNumber = textLine.getInt("pen_number");
+    label = textLine.getString("line");
+    plotPenselect(penNumber);
+    println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
+    println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
+    println("Number of characters :" + label.length());
+    for (int i=0; i < label.length(); i = i+1){
+      char c = label.charAt(i);
+      char cnew = evaluateLetter(c); // send to evaluation
+      if (cnew == '\n'){
+        println("Now making a linefeed");
+        plotLetterPosition(0,0.2); // reduce linefeed distance
+        plotLabel(str(cnew));
+      } else if (cnew == '\r') {
+        println("Now making a carriage return");
+        plotLabel(str(cnew));
+      }  
+        else if (cnew == '\t') {
+        println("Now plotting a special character");
+        plotter.write(SpecialCharacter);
+      } else {
+        println("Now plotting: " + cnew);
+        plotLabel(str(cnew));
+      }
     }
-  }
-  plotPosition(0,0); // show the paper
-  delay(label.length() * 500);
+    plotPosition(0,0); // show the paper
+    delay(label.length() * 500);
+    }
   if (ambigFlag = true) { // if there was an abigous letter then...
     println("Overwriting ambigous letters now...");
     plotPenselect(3); // draw now in red
