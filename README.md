@@ -4,7 +4,7 @@ les lettres ont du caractère / plotter
 idée titre : 
 156 charactères max
 Je m'éxcuse pour l'erreure précédente.
-
+PLAIN TEXT 2.0 // PLAIN IFXI 2.0
 
 Projet : Plotter
 Use cut type fonts

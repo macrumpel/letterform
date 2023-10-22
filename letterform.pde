@@ -26,10 +26,14 @@ String label5 = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM?";
 String label2= "IL FAUT\r\nDETRUIRE\r\nLA SYNTAXE";
 String label6= "JE\r\nM'EXCUSE\r\nPOUR\r\nL'ERREUR\r\nPRECEDENTE";
 String label4= "DIFFERENT PREDATORS. DIFFERENT WORDS AND WHEELS. BUT THE SAME SKY. THAT'S THE DARK AGE WE STILL LIVE IN TODAY.";
-String label= "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.";
+String label7= "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.";
+String label= ""; 
 boolean ambigFlag = false;
-String ambigousLetters = "EORB?TU";
+String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
+JSONArray poesieJSON;
+int poesieNumber = 1;
+
 
 //Plotter dimensions
 int xMin = 170;
@@ -53,13 +57,21 @@ void setup(){
   //size(1080, 750);
   smooth();
   
-  println("
- ##  #    #  ### ###     ### ### # # ###     ###     ###
- # # #   # #  #  # #      #  #   # #  #        #     # #
- ##  #   ###  #  # #      #  ##   #   #      ###     # #
- #   #   # #  #  # #      #  #   # #  #      #       # #
- #   ### # # ### # #     ### #   # # ###     ###  #  ###
-")
+
+  // JSON import
+  poesieJSON = loadJSONArray("poesie.json");
+  println("Number of poesie found: " + poesieJSON.size());
+  JSONObject poesieObject = poesieJSON.getJSONObject(poesieNumber);
+  println("Plotting poesie: " + poesieObject);
+  String poesieName = poesieObject.getString("name");
+  println ("Poesie selected: " + poesieName);
+  ambigousLetters = poesieObject.getString("ambigous");
+  println ("Ambigous letters used: " + ambigousLetters);
+  controlSize = poesieObject.getFloat("font size");
+  println ("This is for font size of " + controlSize + "cm.");
+  int poesieLines = poesieObject.getJSONArray("text lines").size();
+  println(poesieLines + " line(s) in this poesie.");
+  println ("[JSON] Poesie loaded.");
   // interface 
   controlP5 = new ControlP5(this);
   controlP5.addToggle("toggleAmp").setPosition(20,20).setSize(20,20)
