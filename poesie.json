@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "ambigous": "EORB?TU",
+    "name": "Goat",
+	"font size": 1,
+	"text lines": [
+		{
+			"line": "    CAN\r\n             \r\n             IN\r\n        \r\n        :\r\n.             \r\n    CAN\r\n         TE     \r\n     RAIN   \r\n EANS        \r\n.    RAIN:\r\n.             "
+		},
+		{
+			"line": "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGATE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE."
+		}
+]
+  },
+  {
+    "id": 1,
+    "species": "Panthera pardus",
+    "name": "Leopard"
+  },
+  {
+    "id": 2,
+    "species": "Equus zebra",
+    "name": "Zebra"
+  }
+]

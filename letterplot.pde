@@ -24,6 +24,10 @@ void plotletterAmbig (char letterAmbig){
         plotter.write("UC0,3,99,0,5");
         println("Now plotting to complete letter " + letterAmbig);
         break;
+    case 'B':
+        plotter.write("UC3,8,99,0.5,-0.2,0.3,-0.3,0.2,-0.5,0,-1.5,-0.2,-0.5,-0.3,-0.3,-0.5,-0.2,0.5,-0.2,0.3,-0.3,0.2,-0.5,0,-2.5,-0.2,-0.5,-0.3,-0.3,-0.5,-0.2,");
+        println("Now plotting to complete letter " + letterAmbig);
+        break;
     
     }
 }

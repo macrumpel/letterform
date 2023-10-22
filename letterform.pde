@@ -15,17 +15,18 @@ boolean toggleFreq = true;
 boolean togglePlotter = true;
 boolean toggleSpeed = false;
 boolean toggleAuto = false;
-float controlSize = 1.5;
+float controlSize = 1.0; // text size in cm
 
 //Enable plotting?
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label= "THIS ATE";
+String label1= "BYE BYE\r\nWHAT IS?";
 String label5 = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM?";
-String label2= "   DE";
-String label3= "abcdefghijklm"; 
-String label4= "nopqrstuvwxyz";
+String label2= "IL FAUT\r\nDETRUIRE\r\nLA SYNTAXE";
+String label6= "JE\r\nM'EXCUSE\r\nPOUR\r\nL'ERREUR\r\nPRECEDENTE";
+String label4= "DIFFERENT PREDATORS. DIFFERENT WORDS AND WHEELS. BUT THE SAME SKY. THAT'S THE DARK AGE WE STILL LIVE IN TODAY.";
+String label= "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.";
 boolean ambigFlag = false;
 String ambigousLetters = "EORB?TU";
 String SpecialCharacter = "";
@@ -43,9 +44,6 @@ int penNumber = 4;
 int pSpeed = 10;
 int vsOld; // last speed
 
-//Current rows and cols
-int row = 0;
-int col = 0;
 
 
 //Let's set this up
@@ -55,6 +53,13 @@ void setup(){
   //size(1080, 750);
   smooth();
   
+  println("
+ ##  #    #  ### ###     ### ### # # ###     ###     ###
+ # # #   # #  #  # #      #  #   # #  #        #     # #
+ ##  #   ###  #  # #      #  ##   #   #      ###     # #
+ #   #   # #  #  # #      #  #   # #  #      #       # #
+ #   ### # # ### # #     ### #   # # ###     ###  #  ###
+")
   // interface 
   controlP5 = new ControlP5(this);
   controlP5.addToggle("toggleAmp").setPosition(20,20).setSize(20,20)
@@ -96,7 +101,7 @@ void setup(){
   delay(2000);
   //Initialize plotter
   plotter.write("IN;");
-  plotPosition(4000,100);
+  plotPosition(1000,10);
   plotTextSize(controlSize,controlSize*2);
   plotDirection(0,1);
   plotSpeed(pSpeed);
@@ -113,12 +118,14 @@ void setup(){
 void draw(){
   // plotSpacing(0,-1); not supported
   println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
+  println("Plotting text: " + label);
+  println("Number of characters :" + label.length());
   for (int i=0; i < label.length(); i = i+1){
     char c = label.charAt(i);
     char cnew = evaluateLetter(c); // send to evaluation
     if (cnew == '\n'){
       println("Now making a linefeed");
-      plotLetterPosition(0,0.1); // reduce linefeed distance
+      plotLetterPosition(0,0.2); // reduce linefeed distance
       plotLabel(str(cnew));
     } else if (cnew == '\r') {
       println("Now making a carriage return");
@@ -133,11 +140,11 @@ void draw(){
     }
   }
   plotPosition(0,0); // show the paper
-  delay(5000);
+  delay(label.length() * 500);
   if (ambigFlag = true) { // if there was an abigous letter then...
     println("Overwriting ambigous letters now...");
     plotPenselect(3); // draw now in red
-    plotPosition(4000,100); // go to initial position (multiline)
+    plotPosition(1000,10); // go to initial position (multiline)
     //plotLetterPosition(-label.length(), 0); // go back to the latest place
     for (int i=0; i < label.length(); i = i+1){
       char c = label.charAt(i);
@@ -155,7 +162,8 @@ void draw(){
 void plotLabel(String text){
   //Draw a label at the end
   //println(text);
-  plotter.write("LB" + text + char(3)); //Draw label taille 1cm, direction 0, char(3)= terminateur
+  plotter.write("LB" + text + char(3)); //Draw label, char(3)= terminator
+  delay(500);
 }
 
 void plotPenselect(int penNumber){

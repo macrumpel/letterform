@@ -18,7 +18,8 @@ char evaluateLetter(char letter){
           ambigFlag = true;
           break;
         case 'B' :
-          letter = 'E';
+          letter = '\t';
+          SpecialCharacter = "UC3,8,99,-3,0,0,-8,3,0,-99,-3,4.5,99,3,0"; // for a better E
           ambigFlag = true;
           break;
         case '?' :
@@ -46,7 +47,7 @@ char evaluateAmbigLetter(char letter){
       plotletterAmbig(letter);
   } else if (letter == '\n') {
       plotLabel(str(letter));
-      plotLetterPosition(0,0.1); // reduce linefeed distance
+      plotLetterPosition(0,0.2); // reduce linefeed distance
   }  else if (letter == '\r') {
       plotLabel(str(letter));
   }  else {

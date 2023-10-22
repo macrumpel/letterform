@@ -1,6 +1,11 @@
 # letterform
 les lettres ont du caractère / plotter
 
+idée titre : 
+156 charactères max
+Je m'éxcuse pour l'erreure précédente.
+
+
 Projet : Plotter
 Use cut type fonts
 
