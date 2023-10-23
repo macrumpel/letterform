@@ -33,7 +33,8 @@ String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
 JSONArray poesieJSON;
 JSONArray poesieTextJSON;
-int poesieNumber = 2; // select poesie in json
+String ambigousLabel = "";
+int poesieNumber = 0; // select poesie in json
 int poesieLines = 1;
 
 
@@ -64,6 +65,8 @@ void setup(){
   poesieJSON = loadJSONArray("poesie.json");
   println("Number of poesie found: " + poesieJSON.size());
   JSONObject poesieObject = poesieJSON.getJSONObject(poesieNumber);
+  ambigousLabel = poesieObject.getString("ambigous line");
+  println("Ambigous is " + ambigousLabel);
   println("Plotting poesie: " + poesieObject);
   String poesieName = poesieObject.getString("name");
   println ("Poesie selected: " + poesieName);
@@ -162,7 +165,10 @@ void draw(){
     plotPosition(0,0); // show the paper
     delay(label.length() * 500);
     }
-  if (ambigFlag = true) { // if there was an abigous letter then...
+  if (ambigFlag = true) { // if there was an ambigous letter then...
+    if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
+      label = ambigousLabel;
+    }
     println("Overwriting ambigous letters now...");
     plotPenselect(3); // draw now in red
     plotPosition(1000,10); // go to initial position (multiline)
@@ -207,8 +213,6 @@ void plotLetterPosition(float letterposX, float letterposY){
 
 void plotPosition(float xPos, float yPos){
   float ty = map(yPos, 0, height, yMin, yMax); // map coordinate Y
-  println(ty);
-  println(height);
   plotter.write("PU"+xPos+","+ty+";"); // position pen
 }
 

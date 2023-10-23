@@ -13,7 +13,9 @@
 			"line": "YOU    \r\nDESCRIBE YOUR\r\nOWN LANGUAGE   \r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU    \r\nINVESTIGA   YOUR\r\nOWN B     BY\r\nM     OF YOUR\r\nOWN B    :\r\nBUT NOT QUITE.",
 			"pen_number": 3
 		}
-]
+],
+	"ambigous line": "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.",
+			"pen_number": 4
   },
   {
     "id": 1,
