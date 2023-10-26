@@ -46,7 +46,8 @@ char evaluateAmbigLetter(char letter){
       ambigFlag = false;
       plotletterAmbig(letter);
   } else if (letter == '\n') {
-      plotLabel(str(letter));
+      println("Now making a linefeed");
+      plotNewline();
       plotLetterPosition(0,0.2); // reduce linefeed distance
   }  else if (letter == '\r') {
       plotLabel(str(letter));

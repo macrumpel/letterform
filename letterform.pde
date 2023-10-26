@@ -32,11 +32,10 @@ float fontSize = 1; // text size in cm
 float plotSize = 0;
 
 
-//Plotter dimensions
-int xMin = 170;
-int yMin = 602;
-int xMax = 10800;
-int yMax = 7500;
+//Plotter starting
+int xPos_mm = 25;
+int yPos_mm = 1;
+
 
 //Plotter initial pen number
 int penNumber = 4;
@@ -82,7 +81,7 @@ void setup(){
   println ("Setting font size of " + fontSize + "cm.");
   poesieTextJSON = poesieObject.getJSONArray("text lines");
   poesieLines = poesieObject.getJSONArray("text lines").size();
-  println(poesieLines + " line(s) in this poesie.");
+  println(poesieLines + " Text(s) in this poesie.");
   textLine = poesieTextJSON.getJSONObject(0);
   String labelLines = textLine.getString("line");
   int lineCounter = 0;
@@ -92,11 +91,14 @@ void setup(){
       lineCounter++;
     }
   }
-  plotSize = (lineCounter-1)*2*fontSize*0.2+fontSize;
-  println("Plotting poesie will take " + lineCounter + "lines and this will be : " + plotSize +" cm.");
+  plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsiez
+  println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +" cm.");
   println("[JSON] Poesie loaded.");
   println();
 
+  // calculate poetry position on paper
+  xPos_mm = int(180 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
+  yPos_mm = 10;
 
 
   //Select a serial port
@@ -120,7 +122,7 @@ void setup(){
   delay(2000);
   //Initialize plotter
   plotter.write("IN;");
-  plotPosition(1000,10);
+  plotPosition(xPos_mm,yPos_mm); //this was calculated 
   plotTextSize(fontSize,fontSize*2);
   plotDirection(0,1);
   plotSpeed(pSpeed);
@@ -172,7 +174,7 @@ void draw(){
     }
     println("Overwriting ambigous letters now...");
     plotPenselect(3); // draw now in red
-    plotPosition(1000,10); // go to initial position (multiline)
+    plotPosition(xPos_mm,yPos_mm); // go to initial position (multiline)
     //plotLetterPosition(-label.length(), 0); // go back to the latest place
     for (int i=0; i < label.length(); i = i+1){
       char c = label.charAt(i);
@@ -218,9 +220,10 @@ void plotNewline(){
   plotter.write("CP;");
 }
 
-void plotPosition(float xPos, float yPos){
-  float ty = map(yPos, 0, height, yMin, yMax); // map coordinate Y
-  plotter.write("PU"+xPos+","+ty+";"); // position pen
+void plotPosition(int xPos, int yPos){ // now in mm
+  float xUnits = xPos / 0.025;
+  float yUnits = yPos / 0.025; // calculation for plotter units / resolution
+  plotter.write("PU"+xUnits+"," + yUnits + ";"); // position pen
 }
 
 void plotSpeed(int speed){
