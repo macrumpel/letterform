@@ -13,12 +13,15 @@ idées : Pangramme, Spiegelschrift, replaced letters later corrected
 use : paragraph, poésIe, specific text quotation
 
 Idées de texte :
-IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM.
+IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM.
 EST-CE QU'IL Y A UNE ERREUR DANS LE PROGRAM?
 ERROR IN THE SYSTEM?
 BOUCLE
 LA PENSEE SE FAIT DANS LA BOUCHE (TZARA)
 
+A faire:
+
+correct letter by letter
 
 
 Références

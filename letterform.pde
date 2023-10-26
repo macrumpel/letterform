@@ -1,41 +1,35 @@
 import processing.serial.*;
-import controlP5.*;
 
 Serial myPort;    // Create object from Serial class
 Plotter plotter;  // Create a plotter object
 int serialPort=2; // select the port
 int val;          // Data received from the serial port
 int lf = 10;      // ASCII linefeed
-
-
-// controlp5
-ControlP5 controlP5;
-boolean toggleAmp = true;
-boolean toggleFreq = true;
-boolean togglePlotter = true;
-boolean toggleSpeed = false;
-boolean toggleAuto = false;
-float controlSize = 1.0; // text size in cm
+PFont font;
 
 //Enable plotting?
 final boolean PLOTTING_ENABLED = true;
 
 //Label
-String label1= "BYE BYE\r\nWHAT IS?";
-String label5 = "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM?";
-String label2= "IL FAUT\r\nDETRUIRE\r\nLA SYNTAXE";
-String label6= "JE\r\nM'EXCUSE\r\nPOUR\r\nL'ERREUR\r\nPRECEDENTE";
+String label1= "BYE BYE\nWHAT IS?";
+String label5 = "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?";
+String label2= "IL FAUT\nDETRUIRE\nLA SYNTAXE";
+String label6= "JE\nM'EXCUSE\nPOUR\nL'ERREUR\nPRECEDENTE";
 String label4= "DIFFERENT PREDATORS. DIFFERENT WORDS AND WHEELS. BUT THE SAME SKY. THAT'S THE DARK AGE WE STILL LIVE IN TODAY.";
-String label7= "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.";
+String label7= "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.";
 String label= ""; 
 boolean ambigFlag = false;
 String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
 JSONArray poesieJSON;
 JSONArray poesieTextJSON;
+JSONObject poesieObject;
+JSONObject textLine;
 String ambigousLabel = "";
-int poesieNumber = 0; // select poesie in json
+int poesieNumber = 4; // select poesie in json
 int poesieLines = 1;
+float fontSize = 1; // text size in cm
+float plotSize = 0;
 
 
 //Plotter dimensions
@@ -55,16 +49,28 @@ int vsOld; // last speed
 
 //Let's set this up
 void setup(){
-  fullScreen(); // to use the whole screen, projector etc
-  background(233, 233, 220);
-  //size(1080, 750);
-  smooth();
+  //fullScreen(); // to use the whole screen, projector etc
+  size(1080, 750);
+  background(200);
+  //smooth();
+  //textSize(26);
+  font = loadFont("HelveticaNeue-Light-48.vlw");
+  fill(0);
+  textFont(font,36);
   
 
   // JSON import
   poesieJSON = loadJSONArray("poesie.json");
+
+  // displaying the names of poetry
+  for (int p=0; p<poesieJSON.size(); p=p+1){
+    poesieObject = poesieJSON.getJSONObject(p);
+    text(p + " / " + poesieObject.getString("name"),100,50+50*p);
+    println(poesieObject.getString("name"));
+  }
+
   println("Number of poesie found: " + poesieJSON.size());
-  JSONObject poesieObject = poesieJSON.getJSONObject(poesieNumber);
+  poesieObject = poesieJSON.getJSONObject(poesieNumber);
   ambigousLabel = poesieObject.getString("ambigous line");
   println("Ambigous is " + ambigousLabel);
   println("Plotting poesie: " + poesieObject);
@@ -72,33 +78,26 @@ void setup(){
   println ("Poesie selected: " + poesieName);
   ambigousLetters = poesieObject.getString("ambigous");
   println ("Ambigous letters used: " + ambigousLetters);
-  controlSize = poesieObject.getFloat("font size");
-  println ("Setting font size of " + controlSize + "cm.");
+  fontSize = poesieObject.getFloat("font size");
+  println ("Setting font size of " + fontSize + "cm.");
   poesieTextJSON = poesieObject.getJSONArray("text lines");
   poesieLines = poesieObject.getJSONArray("text lines").size();
   println(poesieLines + " line(s) in this poesie.");
+  textLine = poesieTextJSON.getJSONObject(0);
+  String labelLines = textLine.getString("line");
+  int lineCounter = 0;
+  for (int k=0; k<labelLines.length(); k=k+1){
+    char d= labelLines.charAt(k);
+    if (d == '\n'){
+      lineCounter++;
+    }
+  }
+  plotSize = (lineCounter-1)*2*fontSize*0.2+fontSize;
+  println("Plotting poesie will take " + lineCounter + "lines and this will be : " + plotSize +" cm.");
   println("[JSON] Poesie loaded.");
   println();
 
-  // interface 
-  controlP5 = new ControlP5(this);
-  controlP5.addToggle("toggleAmp").setPosition(20,20).setSize(20,20)
-    .setCaptionLabel("Amplitude")
-    .setColorCaptionLabel(0);
-  controlP5.addToggle("toggleFreq").setPosition(70,20).setSize(20,20)
-    .setCaptionLabel("Frequency")
-    .setColorCaptionLabel(0);
-  controlP5.addToggle("toggleAuto").setPosition(120,20).setSize(20,20)
-    .setCaptionLabel("Auto")
-    .setColorCaptionLabel(0);
-  controlP5.addSlider("controlSize").setPosition(170,20).setSize(80,20)
-    .setRange(0.1,5)
-    .setCaptionLabel("text size")
-    .setColorCaptionLabel(0);
-  controlP5.addSlider("pSpeed").setPosition(300,20).setSize(80,20)
-    .setColorCaptionLabel(0)
-    .setRange(1,38)
-    .setCaptionLabel("Plot speed");
+
 
   //Select a serial port
   println(Serial.list()); //Print all serial ports to the console
@@ -122,7 +121,7 @@ void setup(){
   //Initialize plotter
   plotter.write("IN;");
   plotPosition(1000,10);
-  plotTextSize(controlSize,controlSize*2);
+  plotTextSize(fontSize,fontSize*2);
   plotDirection(0,1);
   plotSpeed(pSpeed);
   // plotSpacing(0,-0.5); not supported
@@ -135,8 +134,9 @@ void setup(){
 }
 
 void draw(){
+
   for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
-    JSONObject textLine = poesieTextJSON.getJSONObject(l);
+    textLine = poesieTextJSON.getJSONObject(l);
     penNumber = textLine.getInt("pen_number");
     label = textLine.getString("line");
     plotPenselect(penNumber);
@@ -148,8 +148,9 @@ void draw(){
       char cnew = evaluateLetter(c); // send to evaluation
       if (cnew == '\n'){
         println("Now making a linefeed");
+        plotNewline();
         plotLetterPosition(0,0.2); // reduce linefeed distance
-        plotLabel(str(cnew));
+        //plotLabel(str(cnew));
       } else if (cnew == '\r') {
         println("Now making a carriage return");
         plotLabel(str(cnew));
@@ -211,6 +212,12 @@ void plotLetterPosition(float letterposX, float letterposY){
   plotter.write("CP" + letterposX + "," + letterposY + ";");
 }
 
+void plotNewline(){
+  // make a carriage return and a new line
+  println("New line...");
+  plotter.write("CP;");
+}
+
 void plotPosition(float xPos, float yPos){
   float ty = map(yPos, 0, height, yMin, yMax); // map coordinate Y
   plotter.write("PU"+xPos+","+ty+";"); // position pen
@@ -231,7 +238,7 @@ void plotDirection(int directCourse, int directElevation){
 
 void keyReleased() {
  if (key == 'P' || key == 'p') {
-      plotTextSize(controlSize,controlSize*2);
+      plotTextSize(fontSize,fontSize*2);
       plotDirection(1,0);
       plotPosition(500,400);
       plotSpeed(pSpeed);
@@ -247,13 +254,7 @@ void keyReleased() {
       delay(5000);
       exit();
     } else if (key == 'A' || key == 'a') {
-      toggleAmp = !toggleAmp;
-      controlP5.getController("toggleAmp").setValue(int(toggleAmp)); 
     } else if (key == 'F' || key == 'f') {
-      toggleFreq = !toggleFreq;
-      controlP5.getController("toggleFreq").setValue(int(toggleFreq)); 
     } else if (key == 'M' || key == 'm') {
-      toggleAuto = !toggleAuto;
-      controlP5.getController("toggleAuto").setValue(int(toggleAuto)); 
     } 
  }

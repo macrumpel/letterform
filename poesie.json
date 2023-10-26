@@ -3,28 +3,30 @@
     "id": 0,
     "ambigous": "EORB?TU",
     "name": "Enzensberger2",
+    "auteur": "Hans Magnus Enzensberger",
 	"font size": 1,
 	"text lines": [
 		{
-			"line": "    CAN\r\n             \r\n             IN\r\n        \r\n        :\r\n              \r\n    CAN\r\n         TE     \r\n     RAIN   \r\n EANS        \r\n.    RAIN",
+			"line": "    CAN\n             \n             IN\n        \n        :\n              \n    CAN\n         TE     \n     RAIN   \n EANS        \n.    RAIN",
 			"pen_number": 2
 		},
 		{
-			"line": "YOU    \r\nDESCRIBE YOUR\r\nOWN LANGUAGE   \r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU    \r\nINVESTIGA   YOUR\r\nOWN B     BY\r\nM     OF YOUR\r\nOWN B    :\r\nBUT NOT QUITE.",
+			"line": "YOU    \nDESCRIBE YOUR\nOWN LANGUAGE   \nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU    \nINVESTIGA   YOUR\nOWN B     BY\nM     OF YOUR\nOWN B    :\nBUT NOT QUITE.",
 			"pen_number": 3
 		}
 ],
-	"ambigous line": "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.",
-			"pen_number": 4
+	"ambigous line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
+	"pen_number": 4
   },
   {
     "id": 1,
    "ambigous": "EORB?TU",
     "name": "Enzensberger",
+    "auteur": "Hans Magnus Enzensberger",
 	"font size": 1,
 	"text lines": [
 		{
-			"line": "YOU CAN\r\nDESCRIBE YOUR\r\nOWN LANGUAGE IN\r\nYOUR OWN\r\nLANGUAGE:\r\nBUT NOT QUITE.\r\nYOU CAN\r\nINVESTIGAE YOUR\r\nOWN BRAIN BY\r\nMEANS OF YOUR\r\nOWN BRAIN:\r\nBUT NOT QUITE.",
+			"line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
 			"pen_number": 3
 		}
 ]
@@ -36,9 +38,54 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "IL Y A\r\nUNE ERREUR\r\nDANS\r\nLE SYSTEM?",
+			"line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?",
 			"pen_number": 2
 		}
 ]
+  },
+  {
+    "id": 3,
+    "ambigous": "EORB?TU",
+    "name": "Moderne",
+    "auteur": "Paul Valery",
+	"font size": 1.2,
+	"text lines": [
+		{
+			"line": "LE MODERNE\nSE CONTENTE\nDE PEU?",
+			"pen_number": 2
+		}
+]
+  },
+  {
+    "id": 4,
+    "ambigous": "EORB?TU",
+    "name": "Clair Obscure",
+    "auteur": "Paul Valery",
+	"font size": 1.1,
+	"text lines": [
+		{
+			"line": "LE CLAIR\nET L’OBSCUR\nSUFFISENT\nA BIEN DES\nEXPRESSIONS\nVISUELLES",
+			"pen_number": 2
+		}
+]
+  },
+  {
+    "id": 5,
+    "ambigous": "EORB?TU",
+    "name": "Sismographe",
+    "auteur": "Eisenstein",
+	"font size": 1.0,
+	"text lines": [
+		{
+			"line": "L’ART\n ST        \n   SIBL     \nSI    RAP?",
+			"pen_number": 2
+		},
+		{
+			"line": "     \nE   LE PLUS\nSEN    E DES\n. SMOG   HES",
+			"pen_number": 3
+		}
+],
+	"ambigous line": "L’ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
+	"pen_number": 4
   }
 ]
