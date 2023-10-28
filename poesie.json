@@ -87,5 +87,35 @@
 ],
 	"ambigous line": "L’ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
 	"pen_number": 4
+  },
+  {
+    "id": 6,
+    "ambigous": "EORB?TU",
+    "name": "Pipe",
+	"font size": 1.2,
+	"text lines": [
+		{
+			"line": "CECI N’EST PAS UNE PIPE.",
+			"pen_number": 2
+		}
+]
+  },
+    {
+    "id": 7,
+    "ambigous": "EORB?TU",
+    "name": "Rien voir",
+	"font size": 1.2,
+	"text lines": [
+		{
+			"line": "     \n          ,\n             \nRIE !",
+			"pen_number": 2
+		},
+				{
+			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
+			"pen_number": 3
+		}
+],
+	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
+	"pen_number": 4
   }
 ]

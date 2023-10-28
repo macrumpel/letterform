@@ -26,7 +26,7 @@ JSONArray poesieTextJSON;
 JSONObject poesieObject;
 JSONObject textLine;
 String ambigousLabel = "";
-int poesieNumber = 4; // select poesie in json
+int poesieNumber = 7; // select poesie in json
 int poesieLines = 1;
 float fontSize = 1; // text size in cm
 float plotSize = 0;
@@ -41,7 +41,7 @@ int yPos_mm = 1;
 int penNumber = 4;
 
 //Plotter speed
-int pSpeed = 10;
+int pSpeed = 9;
 int vsOld; // last speed
 
 
@@ -119,13 +119,14 @@ void setup(){
   
   //Associate with a plotter object
   plotter = new Plotter(myPort);
-  delay(2000);
+
   //Initialize plotter
   plotter.write("IN;");
-  plotPosition(xPos_mm,yPos_mm); //this was calculated 
+ //this was calculated 
   plotTextSize(fontSize,fontSize*2);
   plotDirection(0,1);
   plotSpeed(pSpeed);
+  delay(4000);
   // plotSpacing(0,-0.5); not supported
   
 //Wait 0.5 second per character while printing label
@@ -142,6 +143,7 @@ void draw(){
     penNumber = textLine.getInt("pen_number");
     label = textLine.getString("line");
     plotPenselect(penNumber);
+    plotPosition(xPos_mm,yPos_mm);
     println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
     println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
     println("Number of characters :" + label.length());
@@ -166,7 +168,7 @@ void draw(){
       }
     }
     plotPosition(0,0); // show the paper
-    delay(label.length() * 500);
+    delay(3000);
     }
   if (ambigFlag = true) { // if there was an ambigous letter then...
     if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
@@ -192,8 +194,11 @@ void draw(){
 void plotLabel(String text){
   //Draw a label at the end
   //println(text);
-  plotter.write("LB" + text + char(3)); //Draw label, char(3)= terminator
-  delay(500);
+  if (text == " ") {
+    plotter.write("LB" + text + char(3),300);
+  } else {
+    plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
+  }
 }
 
 void plotPenselect(int penNumber){
@@ -211,19 +216,19 @@ void plotPenselect(int penNumber){
 void plotLetterPosition(float letterposX, float letterposY){
   // move cursor to x and y places of letters
   println("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
-  plotter.write("CP" + letterposX + "," + letterposY + ";");
+  plotter.write("CP" + letterposX + "," + letterposY + ";",1000);
 }
 
 void plotNewline(){
   // make a carriage return and a new line
   println("New line...");
-  plotter.write("CP;");
+  plotter.write("CP;",750);
 }
 
 void plotPosition(int xPos, int yPos){ // now in mm
   float xUnits = xPos / 0.025;
   float yUnits = yPos / 0.025; // calculation for plotter units / resolution
-  plotter.write("PU"+xUnits+"," + yUnits + ";"); // position pen
+  plotter.write("PU"+xUnits+"," + yUnits + ";",1000); // position pen
 }
 
 void plotSpeed(int speed){
