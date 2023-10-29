@@ -19,6 +19,7 @@ String label4= "DIFFERENT PREDATORS. DIFFERENT WORDS AND WHEELS. BUT THE SAME SK
 String label7= "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.";
 String label= ""; 
 boolean ambigFlag = false;
+boolean poesieLoaded = false;
 String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
 JSONArray poesieJSON;
@@ -60,45 +61,7 @@ void setup(){
 
   // JSON import
   poesieJSON = loadJSONArray("poesie.json");
-
-  // displaying the names of poetry
-  for (int p=0; p<poesieJSON.size(); p=p+1){
-    poesieObject = poesieJSON.getJSONObject(p);
-    text(p + " / " + poesieObject.getString("name"),100,50+50*p);
-    println(poesieObject.getString("name"));
-  }
-
-  println("Number of poesie found: " + poesieJSON.size());
-  poesieObject = poesieJSON.getJSONObject(poesieNumber);
-  ambigousLabel = poesieObject.getString("ambigous line");
-  println("Ambigous is " + ambigousLabel);
-  println("Plotting poesie: " + poesieObject);
-  String poesieName = poesieObject.getString("name");
-  println ("Poesie selected: " + poesieName);
-  ambigousLetters = poesieObject.getString("ambigous");
-  println ("Ambigous letters used: " + ambigousLetters);
-  fontSize = poesieObject.getFloat("font size");
-  println ("Setting font size of " + fontSize + "cm.");
-  poesieTextJSON = poesieObject.getJSONArray("text lines");
-  poesieLines = poesieObject.getJSONArray("text lines").size();
-  println(poesieLines + " Text(s) in this poesie.");
-  textLine = poesieTextJSON.getJSONObject(0);
-  String labelLines = textLine.getString("line");
-  int lineCounter = 0;
-  for (int k=0; k<labelLines.length(); k=k+1){
-    char d= labelLines.charAt(k);
-    if (d == '\n'){
-      lineCounter++;
-    }
-  }
-  plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsiez
-  println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +" cm.");
-  println("[JSON] Poesie loaded.");
-  println();
-
-  // calculate poetry position on paper
-  xPos_mm = int(180 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
-  yPos_mm = 10;
+  loadPoesie(poesieNumber);
 
 
   //Select a serial port
@@ -137,68 +100,70 @@ void setup(){
 }
 
 void draw(){
-
-  for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
-    textLine = poesieTextJSON.getJSONObject(l);
-    penNumber = textLine.getInt("pen_number");
-    label = textLine.getString("line");
-    plotPenselect(penNumber);
-    plotPosition(xPos_mm,yPos_mm);
-    println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
-    println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
-    println("Number of characters :" + label.length());
-    for (int i=0; i < label.length(); i = i+1){
-      char c = label.charAt(i);
-      char cnew = evaluateLetter(c); // send to evaluation
-      if (cnew == '\n'){
-        println("Now making a linefeed");
-        plotNewline();
-        plotLetterPosition(0,0.2); // reduce linefeed distance
-        //plotLabel(str(cnew));
-      } else if (cnew == '\r') {
-        println("Now making a carriage return");
-        plotLabel(str(cnew));
-      }  
-        else if (cnew == '\t') {
-        println("Now plotting a special character");
-        plotter.write(SpecialCharacter);
-      } else {
+  if (poesieLoaded) {
+    for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
+      textLine = poesieTextJSON.getJSONObject(l);
+      penNumber = textLine.getInt("pen_number");
+      label = textLine.getString("line");
+      plotPenselect(penNumber);
+      plotPosition(xPos_mm,yPos_mm);
+      println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
+      println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
+      println("Number of characters :" + label.length());
+      for (int i=0; i < label.length(); i = i+1){
+        char c = label.charAt(i);
+        char cnew = evaluateLetter(c); // send to evaluation
+        if (cnew == '\n'){
+          println("Now making a linefeed");
+          plotNewline();
+          plotLetterPosition(0,0.2); // reduce linefeed distance
+          //plotLabel(str(cnew));
+        } else if (cnew == '\r') {
+          println("Now making a carriage return");
+          plotLabel(str(cnew));
+        }  
+          else if (cnew == '\t') {
+          println("Now plotting a special character");
+          plotter.write(SpecialCharacter);
+        } else {
+          println("Now plotting: " + cnew);
+          plotLabel(str(cnew));
+        }
+      }
+      plotPosition(0,0); // show the paper
+      delay(3000);
+      }
+    if (ambigFlag = true) { // if there was an ambigous letter then...
+      if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
+        label = ambigousLabel;
+      }
+      println("Overwriting ambigous letters now...");
+      plotPenselect(3); // draw now in red
+      plotPosition(xPos_mm,yPos_mm); // go to initial position (multiline)
+      //plotLetterPosition(-label.length(), 0); // go back to the latest place
+      for (int i=0; i < label.length(); i = i+1){
+        char c = label.charAt(i);
+        char cnew = evaluateAmbigLetter(c); // send to evaluation
         println("Now plotting: " + cnew);
-        plotLabel(str(cnew));
       }
     }
-    plotPosition(0,0); // show the paper
-    delay(3000);
+    plotPosition(0,0);
+    plotPenselect(0);
+    println("Finished plotting. Waiting for next poetry.");
+    poesieLoaded = false;
     }
-  if (ambigFlag = true) { // if there was an ambigous letter then...
-    if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
-      label = ambigousLabel;
+  }
+
+  // functions :
+
+  void plotLabel(String text){
+    //Draw a label at the end
+    //println(text);
+    if (text == " ") {
+      plotter.write("LB" + text + char(3),300);
+    } else {
+      plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
     }
-    println("Overwriting ambigous letters now...");
-    plotPenselect(3); // draw now in red
-    plotPosition(xPos_mm,yPos_mm); // go to initial position (multiline)
-    //plotLetterPosition(-label.length(), 0); // go back to the latest place
-    for (int i=0; i < label.length(); i = i+1){
-      char c = label.charAt(i);
-      char cnew = evaluateAmbigLetter(c); // send to evaluation
-      println("Now plotting: " + cnew);
-     }
-  }
-  plotPosition(0,0);
-  plotPenselect(0);
-  exit();
-}
-
-// functions :
-
-void plotLabel(String text){
-  //Draw a label at the end
-  //println(text);
-  if (text == " ") {
-    plotter.write("LB" + text + char(3),300);
-  } else {
-    plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
-  }
 }
 
 void plotPenselect(int penNumber){
@@ -244,6 +209,49 @@ void plotDirection(int directCourse, int directElevation){
   plotter.write("DI" + directCourse + "," + directElevation + ";");
 }
 
+void loadPoesie(int poesieNr){ // loading from JSON file
+  // displaying the names of poetry
+  for (int p=0; p<poesieJSON.size(); p=p+1){
+    poesieObject = poesieJSON.getJSONObject(p);
+    if (p == poesieNr){
+      fill(180, 50, 50);
+    } else { fill(0);}
+    text(p + " / " + poesieObject.getString("name"),100,50+50*p);
+    println(poesieObject.getString("name"));
+  }
+  println("Number of poesie found: " + poesieJSON.size());
+  poesieObject = poesieJSON.getJSONObject(poesieNumber);
+  ambigousLabel = poesieObject.getString("ambigous line");
+  println("Ambigous is " + ambigousLabel);
+  println("Plotting poesie: " + poesieObject);
+  String poesieName = poesieObject.getString("name");
+  println ("Poesie selected: " + poesieName);
+  ambigousLetters = poesieObject.getString("ambigous");
+  println ("Ambigous letters used: " + ambigousLetters);
+  fontSize = poesieObject.getFloat("font size");
+  println ("Setting font size of " + fontSize + "cm.");
+  poesieTextJSON = poesieObject.getJSONArray("text lines");
+  poesieLines = poesieObject.getJSONArray("text lines").size();
+  println(poesieLines + " Text(s) in this poesie.");
+  textLine = poesieTextJSON.getJSONObject(0);
+  String labelLines = textLine.getString("line");
+  int lineCounter = 0;
+  for (int k=0; k<labelLines.length(); k=k+1){
+    char d= labelLines.charAt(k);
+    if (d == '\n'){
+      lineCounter++;
+    }
+  }
+  plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsiez
+  println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +" cm.");
+  println("[JSON] Poesie loaded.");
+  println();
+  // calculate poetry position on paper
+  xPos_mm = int(180 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
+  yPos_mm = 10;
+  poesieLoaded = true;
+}
+
 void keyReleased() {
  if (key == 'P' || key == 'p') {
       plotTextSize(fontSize,fontSize*2);
@@ -262,7 +270,10 @@ void keyReleased() {
       delay(5000);
       exit();
     } else if (key == 'A' || key == 'a') {
-    } else if (key == 'F' || key == 'f') {
-    } else if (key == 'M' || key == 'm') {
+    } else if (key == 'Q' || key == 'q') {
+      exit();
+    } else if (key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7') {
+      loadPoesie(int(key));
+      delay(2000);
     } 
  }
