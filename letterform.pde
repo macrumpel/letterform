@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = true;
+final boolean PLOTTING_ENABLED = false;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -27,7 +27,7 @@ JSONArray poesieTextJSON;
 JSONObject poesieObject;
 JSONObject textLine;
 String ambigousLabel = "";
-int poesieNumber = 7; // select poesie in json
+int poesieNumber = 0; // select inital poesie in json file
 int poesieLines = 1;
 float fontSize = 1; // text size in cm
 float plotSize = 0;
@@ -114,19 +114,20 @@ void draw(){
         char c = label.charAt(i);
         char cnew = evaluateLetter(c); // send to evaluation
         if (cnew == '\n'){
-          println("Now making a linefeed");
+          print("Now making a linefeed");
           plotNewline();
           plotLetterPosition(0,0.2); // reduce linefeed distance
           //plotLabel(str(cnew));
         } else if (cnew == '\r') {
-          println("Now making a carriage return");
+          print("Now making a carriage return");
           plotLabel(str(cnew));
         }  
           else if (cnew == '\t') {
-          println("Now plotting a special character");
+          print("Now plotting a special character");
           plotter.write(SpecialCharacter);
         } else {
-          println("Now plotting: " + cnew);
+          print();
+          print(" " + cnew);
           plotLabel(str(cnew));
         }
       }
@@ -144,7 +145,7 @@ void draw(){
       for (int i=0; i < label.length(); i = i+1){
         char c = label.charAt(i);
         char cnew = evaluateAmbigLetter(c); // send to evaluation
-        println("Now plotting: " + cnew);
+        print("Now plotting: " + cnew);
       }
     }
     plotPosition(0,0);
@@ -159,8 +160,9 @@ void draw(){
   void plotLabel(String text){
     //Draw a label at the end
     //println(text);
-    if (text == " ") {
+    if (text.equals(" ")) {
       plotter.write("LB" + text + char(3),300);
+      //println("Delay" + 300);
     } else {
       plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
     }
@@ -180,13 +182,13 @@ void plotPenselect(int penNumber){
 
 void plotLetterPosition(float letterposX, float letterposY){
   // move cursor to x and y places of letters
-  println("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
+  print("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
   plotter.write("CP" + letterposX + "," + letterposY + ";",1000);
 }
 
 void plotNewline(){
   // make a carriage return and a new line
-  println("New line...");
+  print("New line...");
   plotter.write("CP;",750);
 }
 
@@ -247,7 +249,7 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   println("[JSON] Poesie loaded.");
   println();
   // calculate poetry position on paper
-  xPos_mm = int(180 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
+  xPos_mm = int(200 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
   yPos_mm = 10;
   poesieLoaded = true;
 }
