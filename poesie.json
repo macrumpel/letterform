@@ -3,7 +3,7 @@
     "id": 0,
     "ambigous": "EORB?TU",
     "name": "Enzensberger2",
-    "auteur": "Hans Magnus Enzensberger",
+    "author": "Hans Magnus Enzensberger",
 	"font size": 1,
 	"text lines": [
 		{
@@ -15,14 +15,14 @@
 			"pen_number": 3
 		}
 ],
-	"ambigous line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
+	"ambigous line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGATE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
 	"pen_number": 4
   },
   {
     "id": 1,
    "ambigous": "EORB?TU",
     "name": "Enzensberger",
-    "auteur": "Hans Magnus Enzensberger",
+    "author": "Hans Magnus Enzensberger",
 	"font size": 1,
 	"text lines": [
 		{
@@ -47,7 +47,7 @@
     "id": 3,
     "ambigous": "EORB?TU",
     "name": "Moderne",
-    "auteur": "Paul Valery",
+    "author": "Paul Valery",
 	"font size": 1.2,
 	"text lines": [
 		{
@@ -60,7 +60,7 @@
     "id": 4,
     "ambigous": "EORB?TU",
     "name": "Clair Obscure",
-    "auteur": "Paul Valery",
+    "author": "Paul Valery",
 	"font size": 1.1,
 	"text lines": [
 		{
@@ -73,7 +73,7 @@
     "id": 5,
     "ambigous": "EORB?TU",
     "name": "Sismographe",
-    "auteur": "Eisenstein",
+    "author": "Eisenstein",
 	"font size": 1.0,
 	"text lines": [
 		{
@@ -110,7 +110,26 @@
 			"line": "     \n          ,\n             \nRIE !",
 			"pen_number": 2
 		},
-				{
+		{
+			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
+			"pen_number": 3
+		}
+],
+	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
+	"pen_number": 4
+  },
+    {
+    "id": 8,
+    "ambigous": "EORB?TU",
+    "name": "Rien voir",
+    "author": "Adorno",
+	"font size": 1.2,
+	"text lines": [
+		{
+			"line": "WHATEVER DOESN’T CONFORM TO THE RULES OF COMPUTATION AND UTILITY IS SUSPECT",
+			"pen_number": 2
+		},
+			{
 			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
 			"pen_number": 3
 		}

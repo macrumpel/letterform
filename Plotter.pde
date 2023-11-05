@@ -19,7 +19,6 @@ class Plotter {
     if (PLOTTING_ENABLED){
       port.write(hpgl);
       delay(del);
-      println("Plotting with delay " + del);
     }
   }
 }

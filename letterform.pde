@@ -114,16 +114,16 @@ void draw(){
         char c = label.charAt(i);
         char cnew = evaluateLetter(c); // send to evaluation
         if (cnew == '\n'){
-          print("Now making a linefeed");
+          println("Now making a linefeed");
           plotNewline();
           plotLetterPosition(0,0.2); // reduce linefeed distance
           //plotLabel(str(cnew));
         } else if (cnew == '\r') {
-          print("Now making a carriage return");
+          println("Now making a carriage return");
           plotLabel(str(cnew));
         }  
           else if (cnew == '\t') {
-          print("Now plotting a special character");
+          println("Now plotting a special character");
           plotter.write(SpecialCharacter);
         } else {
           print();
@@ -145,7 +145,7 @@ void draw(){
       for (int i=0; i < label.length(); i = i+1){
         char c = label.charAt(i);
         char cnew = evaluateAmbigLetter(c); // send to evaluation
-        print("Now plotting: " + cnew);
+        print("" + cnew);
       }
     }
     plotPosition(0,0);
@@ -161,7 +161,7 @@ void draw(){
     //Draw a label at the end
     //println(text);
     if (text.equals(" ")) {
-      plotter.write("LB" + text + char(3),300);
+      plotter.write("LB" + text + char(3),400);
       //println("Delay" + 300);
     } else {
       plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
@@ -182,13 +182,13 @@ void plotPenselect(int penNumber){
 
 void plotLetterPosition(float letterposX, float letterposY){
   // move cursor to x and y places of letters
-  print("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
+  println("Move by " + letterposX + " places horizontally, " + letterposY + " vertically");
   plotter.write("CP" + letterposX + "," + letterposY + ";",1000);
 }
 
 void plotNewline(){
   // make a carriage return and a new line
-  print("New line...");
+  println("New line...");
   plotter.write("CP;",750);
 }
 
@@ -222,7 +222,8 @@ void loadPoesie(int poesieNr){ // loading from JSON file
     println(poesieObject.getString("name"));
   }
   println("Number of poesie found: " + poesieJSON.size());
-  poesieObject = poesieJSON.getJSONObject(poesieNumber);
+  println("Looking for poesie number " + poesieNr);
+  poesieObject = poesieJSON.getJSONObject(poesieNr);
   ambigousLabel = poesieObject.getString("ambigous line");
   println("Ambigous is " + ambigousLabel);
   println("Plotting poesie: " + poesieObject);
@@ -275,7 +276,9 @@ void keyReleased() {
     } else if (key == 'Q' || key == 'q') {
       exit();
     } else if (key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7') {
-      loadPoesie(int(key));
+      int selectKey = int(str(key));
+      println("Key is " + selectKey);
+      loadPoesie(selectKey);
       delay(2000);
     } 
  }
