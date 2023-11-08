@@ -29,8 +29,11 @@ JSONObject textLine;
 String ambigousLabel = "";
 int poesieNumber = 0; // select inital poesie in json file
 int poesieLines = 1;
+int ambigousPen = 3;
+float ambigousSpeed = 9;
 float fontSize = 1; // text size in cm
 float plotSize = 0;
+float writeSpeed = 9;
 
 
 //Plotter starting
@@ -42,7 +45,7 @@ int yPos_mm = 1;
 int penNumber = 4;
 
 //Plotter speed
-int pSpeed = 9;
+float pSpeed = writeSpeed;
 int vsOld; // last speed
 
 
@@ -104,8 +107,10 @@ void draw(){
     for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
       textLine = poesieTextJSON.getJSONObject(l);
       penNumber = textLine.getInt("pen_number");
+      writeSpeed = textLine.getFloat("write_speed");
       label = textLine.getString("line");
       plotPenselect(penNumber);
+      plotSpeed(writeSpeed);
       plotPosition(xPos_mm,yPos_mm);
       println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
       println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
@@ -137,9 +142,11 @@ void draw(){
     if (ambigFlag = true) { // if there was an ambigous letter then...
       if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
         label = ambigousLabel;
+        plotPenselect(ambigousPen);
+        plotSpeed(ambigousSpeed);
       }
       println("Overwriting ambigous letters now...");
-      plotPenselect(3); // draw now in red
+      //plotPenselect(3); // draw now in red
       plotPosition(xPos_mm,yPos_mm); // go to initial position (multiline)
       //plotLetterPosition(-label.length(), 0); // go back to the latest place
       for (int i=0; i < label.length(); i = i+1){
@@ -188,7 +195,7 @@ void plotLetterPosition(float letterposX, float letterposY){
 
 void plotNewline(){
   // make a carriage return and a new line
-  println("New line...");
+  //println("New line...");
   plotter.write("CP;",750);
 }
 
@@ -198,7 +205,7 @@ void plotPosition(int xPos, int yPos){ // now in mm
   plotter.write("PU"+xUnits+"," + yUnits + ";",1000); // position pen
 }
 
-void plotSpeed(int speed){
+void plotSpeed(float speed){
   println("Plotter speed: " + speed + " cm/s");
   plotter.write("VS" + speed + ";");
 }
@@ -213,18 +220,21 @@ void plotDirection(int directCourse, int directElevation){
 
 void loadPoesie(int poesieNr){ // loading from JSON file
   // displaying the names of poetry
+  text("/// PLAIN IFXI 2.0 ///", 100, 50);
   for (int p=0; p<poesieJSON.size(); p=p+1){
     poesieObject = poesieJSON.getJSONObject(p);
     if (p == poesieNr){
       fill(180, 50, 50);
     } else { fill(0);}
-    text(p + " / " + poesieObject.getString("name"),100,50+50*p);
+    text(p + " / " + poesieObject.getString("name") + " [" + poesieObject.getString("author") + "]",100,125+50*p);
     println(poesieObject.getString("name"));
   }
   println("Number of poesie found: " + poesieJSON.size());
   println("Looking for poesie number " + poesieNr);
   poesieObject = poesieJSON.getJSONObject(poesieNr);
   ambigousLabel = poesieObject.getString("ambigous line");
+  ambigousPen = poesieObject.getInt("pen_number");
+  ambigousSpeed = poesieObject.getFloat("write_speed");
   println("Ambigous is " + ambigousLabel);
   println("Plotting poesie: " + poesieObject);
   String poesieName = poesieObject.getString("name");
@@ -275,9 +285,9 @@ void keyReleased() {
     } else if (key == 'A' || key == 'a') {
     } else if (key == 'Q' || key == 'q') {
       exit();
-    } else if (key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7') {
+    } else if (key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8'|| key == '9') {
       int selectKey = int(str(key));
-      println("Key is " + selectKey);
+      println("Key pressed is " + selectKey);
       loadPoesie(selectKey);
       delay(2000);
     } 

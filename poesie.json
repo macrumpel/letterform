@@ -7,16 +7,19 @@
 	"font size": 1,
 	"text lines": [
 		{
-			"line": "    CAN\n             \n             IN\n        \n        :\n              \n    CAN\n         TE     \n     RAIN   \n EANS        \n.    RAIN",
-			"pen_number": 2
+			"line": "    CAN\n             \n             IN\n        \n        :\n              \n    CAN\n         TE     \n     RAIN   \n EANS        \n     RAIN",
+			"pen_number": 2,
+			"write_speed":9
 		},
 		{
 			"line": "YOU    \nDESCRIBE YOUR\nOWN LANGUAGE   \nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU    \nINVESTIGA   YOUR\nOWN B     BY\nM     OF YOUR\nOWN B    :\nBUT NOT QUITE.",
-			"pen_number": 3
+			"pen_number": 3,
+			"write_speed":9
 		}
 ],
 	"ambigous line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGATE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
-	"pen_number": 4
+	"pen_number": 4,
+	"write_speed":5
   },
   {
     "id": 1,
@@ -27,7 +30,8 @@
 	"text lines": [
 		{
 			"line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGAE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
-			"pen_number": 3
+			"pen_number": 3,
+			"write_speed":9
 		}
 ]
   },
@@ -39,7 +43,8 @@
 	"text lines": [
 		{
 			"line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?",
-			"pen_number": 2
+			"pen_number": 2,
+			"write_speed":9
 		}
 ]
   },
@@ -52,7 +57,8 @@
 	"text lines": [
 		{
 			"line": "LE MODERNE\nSE CONTENTE\nDE PEU?",
-			"pen_number": 2
+			"pen_number": 2,
+			"write_speed":9
 		}
 ]
   },
@@ -65,7 +71,8 @@
 	"text lines": [
 		{
 			"line": "LE CLAIR\nET L’OBSCUR\nSUFFISENT\nA BIEN DES\nEXPRESSIONS\nVISUELLES",
-			"pen_number": 2
+			"pen_number": 2,
+			"write_speed":9
 		}
 ]
   },
@@ -78,15 +85,18 @@
 	"text lines": [
 		{
 			"line": "L’ART\n ST        \n   SIBL     \nSI    RAP?",
-			"pen_number": 2
+			"pen_number": 2,
+			"write_speed":9
 		},
 		{
 			"line": "     \nE   LE PLUS\nSEN    E DES\n. SMOG   HES",
-			"pen_number": 3
+			"pen_number": 3,
+			"write_speed":9
 		}
 ],
 	"ambigous line": "L’ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
-	"pen_number": 4
+	"pen_number": 4,
+	"write_speed":9
   },
   {
     "id": 6,
@@ -95,8 +105,9 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "CECI N’EST PAS UNE PIPE.",
-			"pen_number": 2
+			"line": "CECI\nN’EST PAS\nUNE PIPE.",
+			"pen_number": 2,
+			"write_speed":3
 		}
 ]
   },
@@ -108,33 +119,47 @@
 	"text lines": [
 		{
 			"line": "     \n          ,\n             \nRIE !",
-			"pen_number": 2
+			"pen_number": 2,
+			"write_speed":9
 		},
 		{
 			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
-			"pen_number": 3
+			"pen_number": 3,
+			"write_speed":9
 		}
 ],
 	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
-	"pen_number": 4
+	"pen_number": 4,
+	"write_speed":5
   },
     {
     "id": 8,
     "ambigous": "EORB?TU",
-    "name": "Rien voir",
+    "name": "Suspect",
     "author": "Adorno",
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "WHATEVER DOESN’T CONFORM TO THE RULES OF COMPUTATION AND UTILITY IS SUSPECT",
-			"pen_number": 2
-		},
-			{
-			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
-			"pen_number": 3
+			"line": "WHATEVER\nDOESN’T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
+			"pen_number": 2,
+			"write_speed":9
 		}
 ],
-	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
-	"pen_number": 4
+	"ambigous line": "WHATEVER\nDOESN’T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
+	"pen_number": 4,
+	"write_speed":9
+  },
+  	{
+    "id": 9,
+    "ambigous": "EORB?TU",
+    "name": "Fureur de Lire",
+	"font size": 1.2,
+	"text lines": [
+		{
+			"line": "LES LETTRES\nONT\nDU CARACTERE",
+			"pen_number": 2,
+			"write_speed":3
+		}
+]
   }
 ]

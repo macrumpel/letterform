@@ -19,7 +19,12 @@ ERROR IN THE SYSTEM?
 BOUCLE
 LA PENSEE SE FAIT DANS LA BOUCHE (TZARA)
 
+LES LETTRES ONT DU CARACTERE
+
 A faire:
+
+regler la vitesse dans JSON
+ralentir l'ensemble, pause plus longue
 
 correct letter by letter
 
