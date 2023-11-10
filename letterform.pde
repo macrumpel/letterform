@@ -233,8 +233,10 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   println("Looking for poesie number " + poesieNr);
   poesieObject = poesieJSON.getJSONObject(poesieNr);
   ambigousLabel = poesieObject.getString("ambigous line");
-  ambigousPen = poesieObject.getInt("pen_number");
-  ambigousSpeed = poesieObject.getFloat("write_speed");
+  if (poesieObject.isNull("pen_number") == false){
+    ambigousPen = poesieObject.getInt("pen_number");}
+  if (poesieObject.isNull("write_speed") == false){
+    ambigousSpeed = poesieObject.getFloat("write_speed");}
   println("Ambigous is " + ambigousLabel);
   println("Plotting poesie: " + poesieObject);
   String poesieName = poesieObject.getString("name");
