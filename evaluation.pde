@@ -36,6 +36,10 @@ char evaluateLetter(char letter){
           letter = 'J';
           ambigFlag = true;
           break;
+        case 'Q' :
+          letter = 'O';
+          ambigFlag = true;
+          break;
   }
   }
 return letter;

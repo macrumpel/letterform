@@ -23,10 +23,15 @@ LES LETTRES ONT DU CARACTERE
 
 A faire:
 
-regler la vitesse dans JSON
+regler la vitesse dans JSON (ok)
 ralentir l'ensemble, pause plus longue
-
 correct letter by letter
+writer lines alternatively (up / down)
+
+General description:
+
+Notre langage est composé des lettres et des mots. 
+Les ordinateurs composent avec des caractères ASCII,
 
 
 Références
