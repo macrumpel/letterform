@@ -28,6 +28,10 @@ ralentir l'ensemble, pause plus longue
 
 correct letter by letter
 
+Plain text glitch art
+Plain text is by definition pure text under the form of ASCII caracters.
+Concept of error
+
 
 Références
 https://archive.org/search?query=pierre+garnier+poesie+concr%C3%A8te&sin=TXT
