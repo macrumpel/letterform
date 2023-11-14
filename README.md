@@ -33,6 +33,8 @@ General description:
 Notre langage est composé des lettres et des mots. 
 Les ordinateurs composent avec des caractères ASCII,
 
+Plain IXFI est un projet qui fait appel aux textes générés par les machines et aux erreurs induits par les ordinateurs. Il confond des caractères ASCII et des mots écrits avec une plume sur du papier. Est-ce qu'il y a du sens derrière les lettres produites par une machine ? 
+Plain IXFI est une espece de Glitch Art des documents de texte brute.
 
 Références
 https://archive.org/search?query=pierre+garnier+poesie+concr%C3%A8te&sin=TXT
