@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = false;
+final boolean PLOTTING_ENABLED = true;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -27,7 +27,7 @@ JSONArray poesieTextJSON;
 JSONObject poesieObject;
 JSONObject textLine;
 String ambigousLabel = "";
-int poesieNumber = 0; // select inital poesie in json file
+int poesieNumber = 9; // select inital poesie in json file
 int poesieLines = 1;
 int ambigousPen = 3;
 float ambigousSpeed = 9;
@@ -42,7 +42,7 @@ int yPos_mm = 1;
 
 
 //Plotter initial pen number
-int penNumber = 4;
+int penNumber = 2;
 
 //Plotter speed
 float pSpeed = writeSpeed;
@@ -136,15 +136,16 @@ void draw(){
           plotLabel(str(cnew));
         }
       }
+      plotPenselect(0);
       plotPosition(0,0); // show the paper
-      delay(3000);
+      delay(5000);
       }
     if (ambigFlag = true) { // if there was an ambigous letter then...
       if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
         label = ambigousLabel;
-        plotPenselect(ambigousPen);
-        plotSpeed(ambigousSpeed);
       }
+      plotPenselect(ambigousPen);
+      plotSpeed(ambigousSpeed);
       println("Overwriting ambigous letters now...");
       //plotPenselect(3); // draw now in red
       plotPosition(xPos_mm,yPos_mm); // go to initial position (multiline)
@@ -179,6 +180,7 @@ void plotPenselect(int penNumber){
   //Send pen selection to plotter
   println("Pen slection: " + penNumber);
   plotter.write("SP" + penNumber + ";");
+  delay(3000); // let the plotter change the pen
 }
 
 /* void plotSpacing(float spacing, float lining){
@@ -234,7 +236,8 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   poesieObject = poesieJSON.getJSONObject(poesieNr);
   ambigousLabel = poesieObject.getString("ambigous line");
   if (poesieObject.isNull("pen_number") == false){
-    ambigousPen = poesieObject.getInt("pen_number");}
+    ambigousPen = poesieObject.getInt("pen_number");
+    println("Ambigous pen number is set to:" + ambigousPen);}
   if (poesieObject.isNull("write_speed") == false){
     ambigousSpeed = poesieObject.getFloat("write_speed");}
   println("Ambigous is " + ambigousLabel);

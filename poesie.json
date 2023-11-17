@@ -13,12 +13,12 @@
 		},
 		{
 			"line": "YOU    \nDESCRIBE YOUR\nOWN LANGUAGE   \nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU    \nINVESTIGA   YOUR\nOWN B     BY\nM     OF YOUR\nOWN B    :\nBUT NOT QUITE.",
-			"pen_number": 3,
+			"pen_number": 4,
 			"write_speed":9
 		}
 ],
 	"ambigous line": "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBUT NOT QUITE.\nYOU CAN\nINVESTIGATE YOUR\nOWN BRAIN BY\nMEANS OF YOUR\nOWN BRAIN:\nBUT NOT QUITE.",
-	"pen_number": 4,
+	"pen_number": 3,
 	"write_speed":5
   },
   {
@@ -90,12 +90,12 @@
 		},
 		{
 			"line": "     \nE   LE PLUS\nSEN    E DES\n. SMOG   HES",
-			"pen_number": 3,
+			"pen_number": 4,
 			"write_speed":9
 		}
 ],
 	"ambigous line": "L’ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
-	"pen_number": 4,
+	"pen_number": 3,
 	"write_speed":9
   },
   {
@@ -124,12 +124,12 @@
 		},
 		{
 			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
-			"pen_number": 3,
+			"pen_number": 4,
 			"write_speed":9
 		}
 ],
 	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
-	"pen_number": 4,
+	"pen_number": 3,
 	"write_speed":5
   },
     {
@@ -146,7 +146,7 @@
 		}
 ],
 	"ambigous line": "WHATEVER\nDOESN’T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
-	"pen_number": 4,
+	"pen_number": 3,
 	"write_speed":9
   },
   	{
@@ -159,6 +159,19 @@
 			"line": "LES LETTRES\nONT\nDU CARACTERE",
 			"pen_number": 2,
 			"write_speed":3
+		}
+]
+  },
+  {
+    "id": 10,
+    "ambigous": "EORB?TU",
+    "name": "Plain IXFI",
+	"font size": 1.8,
+	"text lines": [
+		{
+			"line": "Plain TEXT",
+			"pen_number": 2,
+			"write_speed":2
 		}
 ]
   }
