@@ -7,7 +7,7 @@
 	"font size": 1,
 	"text lines": [
 		{
-			"line": "    CAN\n             \n             IN\n        \n        :\n              \n    CAN\n         TE     \n     RAIN   \n EANS        \n     RAIN",
+			"line": "    CAN\n             \n             IN\n        \n         \n              \n    CAN\n         TE     \n     RAIN   \n EANS        \n     RAIN",
 			"pen_number": 2,
 			"write_speed":9
 		},
@@ -42,11 +42,19 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?",
+			"line": "IL Y A\n\nDANS\n   SYST   ",
 			"pen_number": 2,
 			"write_speed":9
+		},
+				{
+			"line": "      \nUNE ERREUR\n\nLE     EM?",
+			"pen_number": 4,
+			"write_speed":9
 		}
-]
+],
+	"ambigous line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?",
+	"pen_number": 3,
+	"write_speed":5
   },
   {
     "id": 3,
