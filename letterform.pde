@@ -64,8 +64,8 @@ void setup(){
 
   // JSON import
   poesieJSON = loadJSONArray("poesie.json");
-  loadPoesie(poesieNumber);
-
+  loadPoesie(99); // not actually, to allow application to start without plotting
+  poesieLoaded = false;
 
   //Select a serial port
   println(Serial.list()); //Print all serial ports to the console
@@ -136,9 +136,9 @@ void draw(){
           plotLabel(str(cnew));
         }
       }
-      plotPenselect(0);
       plotPosition(0,0); // show the paper
-      delay(5000);
+      plotPenselect(0);
+      delay(5000 * int(10 / writeSpeed));
       }
     if (ambigFlag = true) { // if there was an ambigous letter then...
       if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
@@ -172,7 +172,7 @@ void draw(){
       plotter.write("LB" + text + char(3),400);
       //println("Delay" + 300);
     } else {
-      plotter.write("LB" + text + char(3),1200); //Draw label, char(3)= terminator
+      plotter.write("LB" + text + char(3), int(1200 *10 / writeSpeed)); //Draw label, char(3)= terminator
     }
 }
 

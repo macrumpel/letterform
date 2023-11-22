@@ -47,12 +47,12 @@
 			"write_speed":9
 		},
 				{
-			"line": "      \nUNE ERREUR\n\nLE     EM?",
+			"line": "      \nUNE ERREUR\n\nLE     EME?",
 			"pen_number": 4,
 			"write_speed":9
 		}
 ],
-	"ambigous line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEM?",
+	"ambigous line": "IL Y A\nUNE ERREUR\nDANS\nLE SYSTEME?",
 	"pen_number": 3,
 	"write_speed":5
   },
@@ -73,12 +73,12 @@
   {
     "id": 4,
     "ambigous": "EORB?TU",
-    "name": "Clair Obscure",
+    "name": "Clair obscur",
     "author": "Paul Valery",
 	"font size": 1.1,
 	"text lines": [
 		{
-			"line": "LE CLAIR\nET L’OBSCUR\nSUFFISENT\nA BIEN DES\nEXPRESSIONS\nVISUELLES",
+			"line": "LE CLAIR\nET L'OBSCUR\nSUFFISENT\nA BIEN DES\nEXPRESSIONS\nVISUELLES",
 			"pen_number": 2,
 			"write_speed":9
 		}
@@ -92,17 +92,17 @@
 	"font size": 1.0,
 	"text lines": [
 		{
-			"line": "L’ART\n ST        \n   SIBL     \nSI    RAP?",
+			"line": "L'ART\n ST        \n   SIBL     \nSI    RAP?",
 			"pen_number": 2,
 			"write_speed":9
 		},
 		{
-			"line": "     \nE   LE PLUS\nSEN    E DES\n. SMOG   HES",
+			"line": "     \nE   LE PLUS\nSEN    E DES\n  SMOG   HES",
 			"pen_number": 4,
 			"write_speed":9
 		}
 ],
-	"ambigous line": "L’ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
+	"ambigous line": "L'ART\nEST LE PLUS\nSENSIBLE DES\nSISMOGRAPHES",
 	"pen_number": 3,
 	"write_speed":9
   },
@@ -113,7 +113,7 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "CECI\nN’EST PAS\nUNE PIPE.",
+			"line": "CECI\nN’EST PAS\nUNE DICTÉE?",
 			"pen_number": 2,
 			"write_speed":3
 		}
@@ -148,12 +148,12 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "WHATEVER\nDOESN’T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
+			"line": "WHATEVER\nDOESN'T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
 			"pen_number": 2,
 			"write_speed":9
 		}
 ],
-	"ambigous line": "WHATEVER\nDOESN’T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
+	"ambigous line": "WHATEVER\nDOESN'T CONFORM\nTO THE RULES OF\nCOMPUTATION\nAND UTILITY\nIS SUSPECT",
 	"pen_number": 3,
 	"write_speed":9
   },
@@ -173,7 +173,7 @@
   {
     "id": 10,
     "ambigous": "EORB?TU",
-    "name": "Plain IXFI",
+    "name": "Plain IFXI",
 	"font size": 1.8,
 	"text lines": [
 		{
