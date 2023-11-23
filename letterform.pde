@@ -64,21 +64,21 @@ void setup(){
 
   // JSON import
   poesieJSON = loadJSONArray("poesie.json");
-  loadPoesie(99); // not actually, to allow application to start without plotting
+  loadPoesie(0); // not actually, to allow application to start without plotting
   poesieLoaded = false;
 
   //Select a serial port
   println(Serial.list()); //Print all serial ports to the console
   int portNumber = Serial.list().length;
   println("Number of ports: " + portNumber + ", port selected: " + serialPort);
-  /*if (serialPort>=portNumber){
+  if (serialPort>=portNumber){
     serialPort = portNumber-1;
     println("Selected port not available, changing to last port...");
   }
   String portName = Serial.list()[serialPort]; //make sure you pick the right one
   println("Plotting to port: " + portName);
-  */
-  String portName = "/dev/ttys002"; // for Moxa Device
+
+  // String portName = "/dev/ttys002"; // for Moxa Device
   //Open the port
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil(lf);

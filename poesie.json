@@ -92,7 +92,7 @@
 	"font size": 1.0,
 	"text lines": [
 		{
-			"line": "L'ART\n ST        \n   SIBL     \nSI    RAP?",
+			"line": "L'ART\n ST        \n   SIBL     \nSI    RAP",
 			"pen_number": 2,
 			"write_speed":9
 		},
@@ -113,7 +113,7 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "CECI\nN’EST PAS\nUNE DICTÉE?",
+			"line": "CECI\nN'EST PAS\nUNE DICTÉE?",
 			"pen_number": 2,
 			"write_speed":3
 		}
@@ -126,7 +126,7 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "     \n          ,\n             \nRIE !",
+			"line": "     \n\n             \nRIE !",
 			"pen_number": 2,
 			"write_speed":9
 		},
@@ -161,7 +161,7 @@
     "id": 9,
     "ambigous": "EORB?TU",
     "name": "Fureur de Lire",
-	"font size": 1.2,
+	"font size": 1.8,
 	"text lines": [
 		{
 			"line": "LES LETTRES\nONT\nDU CARACTERE",
