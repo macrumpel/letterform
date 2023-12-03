@@ -52,8 +52,8 @@ int vsOld; // last speed
 
 //Let's set this up
 void setup(){
-  //fullScreen(); // to use the whole screen, projector etc
-  size(1080, 750);
+  fullScreen(); // to use the whole screen, projector etc
+  //size(1080, 750);
   background(200);
   //smooth();
   //textSize(26);
