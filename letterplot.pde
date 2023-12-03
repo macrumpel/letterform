@@ -16,6 +16,10 @@ void plotletterAmbig (char letterAmbig){
         plotLabel("?");
         println("Now plotting to complete sign " + letterAmbig);
         break;
+    case '!':
+        plotLabel("!");
+        println("Now plotting to complete sign " + letterAmbig);
+        break;
     case 'T':
         plotter.write("UC0,8,99,4,0");
         println("Now plotting to complete letter " + letterAmbig);

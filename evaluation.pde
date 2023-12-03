@@ -26,6 +26,10 @@ char evaluateLetter(char letter){
           letter = '.';
           ambigFlag = true;
           break;
+        case '!' :
+          letter = '.';
+          ambigFlag = true;
+          break;
         case 'T' :
           letter = '\t';
           SpecialCharacter = "UC2,0,99,0,8";
