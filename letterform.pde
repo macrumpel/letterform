@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = true;
+final boolean PLOTTING_ENABLED = false;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -20,6 +20,7 @@ String label7= "YOU CAN\nDESCRIBE YOUR\nOWN LANGUAGE IN\nYOUR OWN\nLANGUAGE:\nBU
 String label= ""; 
 boolean ambigFlag = false;
 boolean poesieLoaded = false;
+boolean directionChange = false;
 String ambigousLetters = "EORB?T";
 String SpecialCharacter = "";
 JSONArray poesieJSON;
@@ -39,6 +40,8 @@ float writeSpeed = 9;
 //Plotter starting
 int xPos_mm = 25;
 int yPos_mm = 1;
+int horizontalDirection = 0;
+int verticalDirection = 1;
 
 
 //Plotter initial pen number
@@ -90,7 +93,7 @@ void setup(){
   plotter.write("IN;");
  //this was calculated 
   plotTextSize(fontSize,fontSize*2);
-  plotDirection(0,1);
+  plotDirection(horizontalDirection, verticalDirection);
   plotSpeed(pSpeed);
   delay(4000);
   // plotSpacing(0,-0.5); not supported
@@ -119,9 +122,13 @@ void draw(){
         char c = label.charAt(i);
         char cnew = evaluateLetter(c); // send to evaluation
         if (cnew == '\n'){
-          println("Now making a linefeed");
-          plotNewline();
-          plotLetterPosition(0,0.2); // reduce linefeed distance
+          if (directionChange = false){
+            println("Now making a linefeed");
+            plotNewline();
+            plotLetterPosition(0,0.2); // reduce linefeed distance
+          } else {
+            plotSwitchDirection();
+          }
           //plotLabel(str(cnew));
         } else if (cnew == '\r') {
           println("Now making a carriage return");
@@ -220,6 +227,32 @@ void plotDirection(int directCourse, int directElevation){
   plotter.write("DI" + directCourse + "," + directElevation + ";");
 }
 
+void plotSwitchDirection(){
+  String direction = str(horizontalDirection) + str(verticalDirection);
+  println("HPGL direction is " + direction);
+  switch (direction){
+    case "01":
+      horizontalDirection = 1;
+      verticalDirection = 1;
+      println("switching direction to 45°");
+      break;
+    case "11":
+      horizontalDirection = 0;
+      verticalDirection = -1;
+      println("switching direction to 135°");
+      break;
+    case "0-1":
+      horizontalDirection = -1;
+      verticalDirection = 0;
+      println("switching direction to 180°");
+      break;
+    case "-10":
+      horizontalDirection = 0;
+      verticalDirection = -1;
+      println("switching direction to 0°");
+      break;
+  } 
+}
 void loadPoesie(int poesieNr){ // loading from JSON file
   // displaying the names of poetry
   text("/// PLAIN IFXI 2.0 ///", 100, 50);
@@ -248,6 +281,10 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   println ("Ambigous letters used: " + ambigousLetters);
   fontSize = poesieObject.getFloat("font size");
   println ("Setting font size of " + fontSize + "cm.");
+  if (poesieObject.isNull("direction change") == false){
+    directionChange = poesieObject.getBoolean("direction change");
+    println("Change direction activated. " + directionChange);
+  }
   poesieTextJSON = poesieObject.getJSONArray("text lines");
   poesieLines = poesieObject.getJSONArray("text lines").size();
   println(poesieLines + " Text(s) in this poesie.");

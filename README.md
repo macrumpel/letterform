@@ -30,6 +30,7 @@ ralentir l'ensemble, pause plus longue
 correct letter by letter (ok)
 write lines alternatively (up / down)
 Add other letters: ! Q É 
+write around corners: one line, than switch direction 90° and so forth
 
 Plot on transparent paper the corrections. To make a book. 
 

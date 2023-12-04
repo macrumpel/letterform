@@ -124,6 +124,7 @@
     "ambigous": "EORB?TU",
     "name": "RIEN VR",
 	"font size": 1.2,
+	"direction change": true,
 	"text lines": [
 		{
 			"line": "     \n\n             \nRIE !",
