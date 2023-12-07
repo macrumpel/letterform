@@ -54,17 +54,15 @@ char evaluateAmbigLetter(char letter){
       ambigFlag = false;
       plotletterAmbig(letter);
   } else if (letter == '\n') {
-      println("Direction change is " + directionChange);
-      if (directionChange = false){
-        println("Now making a linefeed");
-        plotNewline();
-        plotLetterPosition(0,0.2); // reduce linefeed distance
-      } else {
-        plotSwitchDirection();
-      }
-  }  else if (letter == '\r') {
+      println("Now making a linefeed");
+      plotNewline();
+      plotLetterPosition(0,0.2); // reduce linefeed distance
+  } else if (letter == '\r') {
       plotLabel(str(letter));
-  }  else {
+  } else if (letter == '\t') {
+      println("Now making a turn");
+      plotSwitchDirection();
+  } else {
       plotLabel(" ");
   }
 

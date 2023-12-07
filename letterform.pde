@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = true;
+final boolean PLOTTING_ENABLED = false;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -79,7 +79,7 @@ void setup(){
     println("Selected port not available, changing to last port...");
   }
   //String portName = Serial.list()[serialPort]; //make sure you pick the right one
-  String portName = "/dev/ttys007"; // for Moxa Device
+  String portName = "/dev/ttys002"; // for Moxa Device
   println("Plotting to port: " + portName);
   //Open the port
   myPort = new Serial(this, portName, 9600);
@@ -121,21 +121,17 @@ void draw(){
         char c = label.charAt(i);
         char cnew = evaluateLetter(c); // send to evaluation
         if (cnew == '\n'){
-          if (directionChange = false){
-            println("Now making a linefeed");
-            plotNewline();
-            plotLetterPosition(0,0.2); // reduce linefeed distance
-          } else {
-            plotSwitchDirection();
-          }
+          println("Now making a linefeed");
+          plotNewline();
+          plotLetterPosition(0,0.2); // reduce linefeed distance
           //plotLabel(str(cnew));
         } else if (cnew == '\r') {
           println("Now making a carriage return");
           plotLabel(str(cnew));
         }  
           else if (cnew == '\t') {
-          println("Now plotting a special character");
-          plotter.write(SpecialCharacter);
+          println("Now making a turn");
+          plotSwitchDirection();
         } else {
           print();
           print(" " + cnew);
