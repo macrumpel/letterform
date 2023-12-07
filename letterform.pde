@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = false;
+final boolean PLOTTING_ENABLED = true;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -78,10 +78,9 @@ void setup(){
     serialPort = portNumber-1;
     println("Selected port not available, changing to last port...");
   }
-  String portName = Serial.list()[serialPort]; //make sure you pick the right one
+  //String portName = Serial.list()[serialPort]; //make sure you pick the right one
+  String portName = "/dev/ttys007"; // for Moxa Device
   println("Plotting to port: " + portName);
-
-  // String portName = "/dev/ttys002"; // for Moxa Device
   //Open the port
   myPort = new Serial(this, portName, 9600);
   myPort.bufferUntil(lf);
@@ -143,6 +142,9 @@ void draw(){
           plotLabel(str(cnew));
         }
       }
+      horizontalDirection = 0;
+      verticalDirection = 1;
+      plotDirection(horizontalDirection, verticalDirection);
       plotPosition(0,0); // show the paper
       plotPenselect(0);
       delay(5000 * int(10 / writeSpeed));
@@ -233,10 +235,10 @@ void plotSwitchDirection(){
   switch (direction){
     case "01":
       horizontalDirection = 1;
-      verticalDirection = 1;
-      println("switching direction to 45°");
+      verticalDirection = 0;
+      println("switching direction to 90°");
       break;
-    case "11":
+    case "10":
       horizontalDirection = 0;
       verticalDirection = -1;
       println("switching direction to 135°");
@@ -248,10 +250,11 @@ void plotSwitchDirection(){
       break;
     case "-10":
       horizontalDirection = 0;
-      verticalDirection = -1;
+      verticalDirection = 1;
       println("switching direction to 0°");
       break;
   } 
+  plotDirection(horizontalDirection, verticalDirection);
 }
 void loadPoesie(int poesieNr){ // loading from JSON file
   // displaying the names of poetry

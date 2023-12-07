@@ -127,17 +127,17 @@
 	"direction change": true,
 	"text lines": [
 		{
-			"line": "     \n\n             \nRIE !",
+			"line": "         \n          \n             \nRIE !",
 			"pen_number": 2,
 			"write_speed":9
 		},
 		{
-			"line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
+			"line": "    COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\n   N",
 			"pen_number": 4,
 			"write_speed":9
 		}
 ],
-	"ambigous line": "COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
+	"ambigous line": "    COMME\nVOUS VOYEZ,\nVOUS NE VOYEZ\nRIEN!",
 	"pen_number": 3,
 	"write_speed":5
   },
