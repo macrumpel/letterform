@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = false;
+final boolean PLOTTING_ENABLED = true;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -105,7 +105,7 @@ void setup(){
 }
 
 void draw(){
-  if (poesieLoaded) {
+  if (poesieLoaded) { // this gets loaded after number key pressed, see dowmwards
     for (int l=0; l<poesieLines; l=l+1){ // getting the text lines from JSON poesie
       textLine = poesieTextJSON.getJSONObject(l);
       penNumber = textLine.getInt("pen_number");
@@ -113,6 +113,7 @@ void draw(){
       label = textLine.getString("line");
       plotPenselect(penNumber);
       plotSpeed(writeSpeed);
+      plotTextSize(fontSize,fontSize*2);
       plotPosition(xPos_mm,yPos_mm);
       println("*** now starting to plot ***"); // take the label and individually sent the letters to the plotter
       println("Plotting text " + l+1 + "/" + poesieLines + ": " + label);
