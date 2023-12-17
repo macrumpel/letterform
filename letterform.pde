@@ -79,7 +79,7 @@ void setup(){
     println("Selected port not available, changing to last port...");
   }
   //String portName = Serial.list()[serialPort]; //make sure you pick the right one
-  String portName = "/dev/ttys002"; // for Moxa Device
+  String portName = "/dev/ttys007"; // for Moxa Device
   println("Plotting to port: " + portName);
   //Open the port
   myPort = new Serial(this, portName, 9600);
@@ -133,7 +133,11 @@ void draw(){
           else if (cnew == '\t') {
           println("Now making a turn");
           plotSwitchDirection();
-        } else {
+        } else if (cnew == '\b') {
+          println("Now plotting a special character");
+          plotter.write(SpecialCharacter);
+        }  
+          else {
           print();
           print(" " + cnew);
           plotLabel(str(cnew));

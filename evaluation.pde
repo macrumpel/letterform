@@ -18,7 +18,7 @@ char evaluateLetter(char letter){
           ambigFlag = true;
           break;
         case 'B' :
-          letter = '\t';
+          letter = '\b';
           SpecialCharacter = "UC3,8,99,-3,0,0,-8,3,0,-99,-3,4.5,99,3,0"; // for a better E
           ambigFlag = true;
           break;
@@ -31,7 +31,7 @@ char evaluateLetter(char letter){
           ambigFlag = true;
           break;
         case 'T' :
-          letter = '\t';
+          letter = '\b';
           SpecialCharacter = "UC2,0,99,0,8";
           //plotPosition(-1,0);
           ambigFlag = true;
