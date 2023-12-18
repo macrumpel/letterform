@@ -310,6 +310,10 @@ void loadPoesie(int poesieNr){ // loading from JSON file
       characterCounter = 0;
       }
     }
+    if (characterCounter > maxCharacterCounter){
+      maxCharacterCounter = characterCounter;
+      characterCounter = 0;
+      }
   }
   plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsize
   lineLength = maxCharacterCounter * fontSize;

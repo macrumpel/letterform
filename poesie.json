@@ -42,7 +42,7 @@
 	"font size": 1.2,
 	"text lines": [
 		{
-			"line": "IL Y A\n\nDANS\n   SYST   ",
+			"line": "IL Y A\n\nDANS\n   SYST    ",
 			"pen_number": 2,
 			"write_speed":9
 		},
@@ -92,7 +92,7 @@
 	"font size": 1.0,
 	"text lines": [
 		{
-			"line": "L'ART\n ST        \n   SIBL     \nSI    RAP",
+			"line": "L'ART\n ST        \n   SIBL     \nSI    RAP   ",
 			"pen_number": 2,
 			"write_speed":9
 		},
