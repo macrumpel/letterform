@@ -8,7 +8,7 @@ int lf = 10;      // ASCII linefeed
 PFont font;
 
 //Enable plotting?
-final boolean PLOTTING_ENABLED = true;
+final boolean PLOTTING_ENABLED = false;
 
 //Label
 String label1= "BYE BYE\nWHAT IS?";
@@ -35,6 +35,8 @@ float ambigousSpeed = 9;
 float fontSize = 1; // text size in cm
 float plotSize = 0;
 float writeSpeed = 9;
+float paperHeight = 402; // in milimeters A3 -> for A4 change to
+float paperWidth = 275; // in milimeters A3 -> for A4 change to
 
 
 //Plotter starting
@@ -295,18 +297,36 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   textLine = poesieTextJSON.getJSONObject(0);
   String labelLines = textLine.getString("line");
   int lineCounter = 0;
+  int characterCounter = 0;
+  int maxCharacterCounter = 0;
+  float lineLength = 0;
   for (int k=0; k<labelLines.length(); k=k+1){
-    char d= labelLines.charAt(k);
-    if (d == '\n'){
+    char d = labelLines.charAt(k);
+    characterCounter++;
+    if (d == '\n' || d =='\t'){
       lineCounter++;
+      if (characterCounter > maxCharacterCounter){
+      maxCharacterCounter = characterCounter;
+      characterCounter = 0;
+      }
     }
   }
-  plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsiez
+  plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsize
+  lineLength = maxCharacterCounter * fontSize;
   println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +" cm.");
+  println("Maximal line length is " + lineLength + "cm for " + maxCharacterCounter + " characters at " + fontSize + "cm font width.");
+  if (lineLength * 10 > paperWidth) {
+    fontSize = paperWidth / (maxCharacterCounter * 10); // from centimeters to milimeters
+    println("*** At least one line has too many characters and plotting will be partial.  ***");
+    println("*** So reducing font size to plot everything.                                ***");
+    plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsize
+    lineLength = maxCharacterCounter * fontSize;
+    println("*** New font size " + fontSize + "cm. New line length " + lineLength + "cm. New plotSize " + plotSize + "cm. ***");
+  }
   println("[JSON] Poesie loaded.");
   println();
   // calculate poetry position on paper
-  xPos_mm = int(200 - plotSize*10/2); // A3 Paper is 401 mm long >>> Golden / middle position
+  xPos_mm = int((paperHeight / 2) - plotSize*10/2); // A3 plotter area is 401 mm long >>> Golden / middle position. A3 420 * 297 mm
   yPos_mm = 10;
   poesieLoaded = true;
 }
