@@ -152,7 +152,7 @@ void draw(){
       plotPenselect(0);
       delay(5000 * int(10 / writeSpeed));
       }
-    if (ambigFlag = true) { // if there was an ambigous letter then...
+    if (ambigFlag == true) { // if there was an ambigous letter then...
       if (ambigousLabel != null){ // if there is an ambigous text specified in the json, take it
         label = ambigousLabel;
       }
@@ -171,6 +171,7 @@ void draw(){
     plotPosition(0,0);
     plotPenselect(0);
     println("Finished plotting. Waiting for next poetry.");
+    directionChange = false; // resetting values for next plot
     poesieLoaded = false;
     }
   }
@@ -310,17 +311,17 @@ void loadPoesie(int poesieNr){ // loading from JSON file
       characterCounter = 0;
       }
     }
-    if (characterCounter > maxCharacterCounter){
+  }
+      if (characterCounter > maxCharacterCounter){
       maxCharacterCounter = characterCounter;
       characterCounter = 0;
       }
-  }
   plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsize
   lineLength = maxCharacterCounter * fontSize;
-  println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +" cm.");
+  println("Plotting poesie will take " + lineCounter + " lines and this will be : " + plotSize +"cm.");
   println("Maximal line length is " + lineLength + "cm for " + maxCharacterCounter + " characters at " + fontSize + "cm font width.");
   if (lineLength * 10 > paperWidth) {
-    fontSize = paperWidth / (maxCharacterCounter * 10); // from centimeters to milimeters
+    fontSize = (paperWidth - fontSize*20) / (maxCharacterCounter * 10); // from centimeters to milimeters
     println("*** At least one line has too many characters and plotting will be partial.  ***");
     println("*** So reducing font size to plot everything.                                ***");
     plotSize = (lineCounter)*(4*fontSize-4*fontSize*0.2)+fontSize*2; // total size = lines-1 * 2* fontsize * 2 height + 2* fontsize
@@ -331,7 +332,13 @@ void loadPoesie(int poesieNr){ // loading from JSON file
   println();
   // calculate poetry position on paper
   xPos_mm = int((paperHeight / 2) - plotSize*10/2); // A3 plotter area is 401 mm long >>> Golden / middle position. A3 420 * 297 mm
-  yPos_mm = 10;
+  if (directionChange == true){
+    yPos_mm = int((paperWidth / 2 ) - (lineLength * 10 / 2 - fontSize * 10));
+    println("Plot tries to be centered at " + yPos_mm + "mm from left bord");
+  } else {
+    yPos_mm = 10;
+  }
+  
   poesieLoaded = true;
 }
 
