@@ -171,6 +171,9 @@ void draw(){
     plotPosition(0,0);
     plotPenselect(0);
     println("Finished plotting. Waiting for next poetry.");
+    horizontalDirection = 0;
+    verticalDirection = 1;
+    plotDirection(horizontalDirection, verticalDirection);
     directionChange = false; // resetting values for next plot
     poesieLoaded = false;
     }
